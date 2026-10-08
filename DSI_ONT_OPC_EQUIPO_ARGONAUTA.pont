@@ -1,0 +1,81 @@
+; Thu Oct 08 09:54:51 CEST 2026
+; 
+;+ (version "3.4.8")
+;+ (build "Build 629")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract))
+
+(defclass Ser
+	(is-a %3ASYSTEM-CLASS)
+	(role abstract))
+
+(defclass Mortal
+	(is-a Ser)
+	(role abstract))
+
+(defclass Semidios
+	(is-a Mortal)
+	(role concrete))
+
+(defclass Criatura
+	(is-a Mortal)
+	(role abstract))
+
+(defclass Gorgona
+	(is-a Criatura)
+	(role concrete))
+
+(defclass CriaturaMarina
+	(is-a Criatura)
+	(role concrete))
+
+(defclass Heroe
+	(is-a Mortal)
+	(role concrete))
+
+(defclass Humano
+	(is-a Mortal)
+	(role concrete))
+
+(defclass Inmortal
+	(is-a Ser)
+	(role abstract))
+
+(defclass Dios
+	(is-a Inmortal)
+	(role concrete))
+
+(defclass DiosMenor
+	(is-a Inmortal)
+	(role abstract))
+
+(defclass Graya
+	(is-a DiosMenor)
+	(role concrete))
+
+(defclass Ninfa
+	(is-a DiosMenor)
+	(role concrete))
+
+(defclass Objeto
+	(is-a %3ASYSTEM-CLASS)
+	(role abstract))
+
+(defclass Arma
+	(is-a Objeto)
+	(role concrete))
+
+(defclass ObjetoMagico
+	(is-a Objeto)
+	(role concrete))
+
+(defclass Capacidad
+	(is-a %3ASYSTEM-CLASS)
+	(role concrete))
+
+(defclass Lugar
+	(is-a %3ASYSTEM-CLASS)
+	(role concrete))
