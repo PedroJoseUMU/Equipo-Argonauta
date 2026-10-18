@@ -1,7 +1,39 @@
-; Sun Oct 11 12:02:18 CEST 2026
+; Sun Oct 18 12:31:14 CEST 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
 
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class16] of  %3APAL-CONSTRAINT
-)
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class0] of  %3APAL-CONSTRAINT
+
+	(%3APAL-DESCRIPTION "Para cualquier moral y cualquier dios, no puede ocurrir que ese mortal tenga simultaneamente el faovr y el enojo de ese mismo dios.")
+	(%3APAL-NAME "NoFavorYEnojoSimultaneos")
+	(%3APAL-RANGE "(defrange ?mortal :FRAME Mortal)\n(defrange ?dios :FRAME Diosl)")
+	(%3APAL-STATEMENT "(forall ?mortal\n        (forall ?dios\n                (not \n                     (and \n                          (tieneElFavorDe ?mortal ?dios)\n                          (tieneElEnojoDe ?mortal ?dios)\n	)\n                )\n         )\n)"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10001] of  %3APAL-CONSTRAINT
+
+	(%3APAL-DESCRIPTION "Si un ser mata a un mortal, la propiedad booleana estaVivo de ese mortal debe ponerse a false (esta a true por defecto)")
+	(%3APAL-NAME "SiMuertoEntoncesNoVivo")
+	(%3APAL-RANGE "(defrange ?ser :FRAME Ser)\n(defrange ?mortal :FRAME Mortal)")
+	(%3APAL-STATEMENT "(forall ?ser\n        (forall ?mortal\n                (=>\n                         (mataA ?ser ?mortal)\n                                             (not(estaVivo ?mortal))\n    )\n  )\n)"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10002] of  %3APAL-CONSTRAINT
+
+	(%3APAL-DESCRIPTION "Si un ser es apresado por otro,")
+	(%3APAL-NAME "SiCapturadoEntoncesNoLibre")
+	(%3APAL-RANGE "(defrange ?captor :FRAME Ser)\n(defrange ?capturado :FRAME Ser)")
+	(%3APAL-STATEMENT "(forall ?captor\n        (forall ?capturado\n                (=>\n                       (encierraA ?captor ?capturado)\n                       (not(estaLibre ?capturado))\n   )\n )\n)"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10003] of  %3APAL-CONSTRAINT
+
+	(%3APAL-DESCRIPTION "Si un ser mata a un mortal, este ser no puede ser un mortal muerto")
+	(%3APAL-NAME "MuertosNoMatan")
+	(%3APAL-RANGE "(defrange ?ser :FRAME Ser)\n(defrange ?mortal :FRAME Mortal)")
+	(%3APAL-STATEMENT "(forall ?ser\n        (forall ?mortal\n                (=>\n                     (and\n                               (mataA ?ser ?mortal)\n                                (instance-of ?ser Mortal)\n                      )\n                      (estaVivo ?ser) \n    )\n  )\n)"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10004] of  %3APAL-CONSTRAINT
+
+	(%3APAL-DESCRIPTION "Para que un ser encirre a otro, este debe estar libre")
+	(%3APAL-NAME "SoloLibresCapturan")
+	(%3APAL-RANGE "(defrange ?ser :FRAME captor)\n(defrange ?ser :FRAME capturado)")
+	(%3APAL-STATEMENT "(forall ?captor\n        (forall ?capturado\n                (=>\n                    (encierraA ?captor ?capturado)\n                    (estaLibre ?captor)\n   )\n )\n)"))
