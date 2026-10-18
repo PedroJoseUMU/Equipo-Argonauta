@@ -1,4 +1,4 @@
-; Sun Oct 18 12:31:14 CEST 2026
+; Sun Oct 18 12:41:52 CEST 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -9,6 +9,13 @@
 	(%3APAL-NAME "NoFavorYEnojoSimultaneos")
 	(%3APAL-RANGE "(defrange ?mortal :FRAME Mortal)\n(defrange ?dios :FRAME Diosl)")
 	(%3APAL-STATEMENT "(forall ?mortal\n        (forall ?dios\n                (not \n                     (and \n                          (tieneElFavorDe ?mortal ?dios)\n                          (tieneElEnojoDe ?mortal ?dios)\n	)\n                )\n         )\n)"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10000] of  %3APAL-CONSTRAINT
+
+	(%3APAL-DESCRIPTION "Si un ser libera a otro, la propiedad estaLibre de este ultimo pasa de false a true")
+	(%3APAL-NAME "SiLiberadoEntoncesLibre")
+	(%3APAL-RANGE "(defrange ?libertador :FRAME Ser)\n(defrange ?liberado :FRAME Ser)")
+	(%3APAL-STATEMENT "(forall ?libertador\n        (forall ?liberado\n                (=>\n                         (LiberaA ?libertador ?liberado)\n                         (estaLibre ?liberado)\n    )\n  )\n)"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10001] of  %3APAL-CONSTRAINT
 
