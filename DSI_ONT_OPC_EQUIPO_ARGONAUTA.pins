@@ -1,4 +1,4 @@
-; Sun Oct 18 12:41:52 CEST 2026
+; Tue Oct 20 20:12:52 CEST 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -44,3 +44,173 @@
 	(%3APAL-NAME "SoloLibresCapturan")
 	(%3APAL-RANGE "(defrange ?ser :FRAME captor)\n(defrange ?ser :FRAME capturado)")
 	(%3APAL-STATEMENT "(forall ?captor\n        (forall ?capturado\n                (=>\n                    (encierraA ?captor ?capturado)\n                    (estaLibre ?captor)\n   )\n )\n)"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20001] of  Dios
+
+	(estaEn [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20002])
+	(estaLibre TRUE)
+	(nombre "Zeus")
+	(tituloDivino "Dios del trueno"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20002] of  Lugar
+
+	(nombre "Monte Olimpo"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20003] of  Graya
+
+	(esHijoDe [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004])
+	(estaLibre TRUE)
+	(nombre "Deino")
+	(poseeObjeto [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20024]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004] of  CriaturaMarina
+
+	(encierraA [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20016])
+	(estaLibre TRUE)
+	(estaVivo TRUE)
+	(nombre "Ceto"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20005] of  Ninfa
+
+	(estaLibre TRUE)
+	(nombre "Eco")
+	(poseeObjeto
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20027]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20007]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20029]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20006] of  Capacidad
+
+	(nombre "Volar"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20007] of  ObjetoMagico
+
+	(nombre "Sandalias Aladas")
+	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20006]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20008] of  Arma
+
+	(nombre "Hoz de Acero")
+	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20009]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20009] of  Capacidad
+
+	(nombre "Decapitar a Medusa"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20010] of  Gorgona
+
+	(estaLibre TRUE)
+	(estaVivo TRUE)
+	(nombre "Medusa")
+	(poseeObjeto [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20019]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20012] of  Semidios
+
+	(esHijoDe
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20001]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20013])
+	(estaLibre TRUE)
+	(estaVivo TRUE)
+	(liberaA [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20016])
+	(localizaA
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20003]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20005])
+	(mataA [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004])
+	(nombre "Perseo")
+	(poseeObjeto
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20008]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20031])
+	(tieneElFavorDe
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20021]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20022]
+		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20023]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20013] of  Humano
+
+	(estaLibre TRUE)
+	(estaVivo TRUE)
+	(nombre "Dánae"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20015] of  Heroe
+
+	(estaLibre TRUE)
+	(estaVivo TRUE)
+	(nombre "Teseo"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20016] of  Humano
+
+	(apresadoPor [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004])
+	(estaLibre FALSE)
+	(estaVivo TRUE)
+	(nombre "Andrómeda"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20017] of  Humano
+
+	(estaLibre TRUE)
+	(estaVivo TRUE)
+	(nombre "Casiopea")
+	(tieneElEnojoDe [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20018]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20018] of  Dios
+
+	(estaLibre TRUE)
+	(nombre "Poseidón")
+	(tituloDivino "Dios del los Mares"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20019] of  ObjetoMagico
+
+	(nombre "Cabeza de Medusa")
+	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20020]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20020] of  Capacidad
+
+	(nombre "Petrificar"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20021] of  Dios
+
+	(estaLibre TRUE)
+	(nombre "Hades")
+	(tituloDivino "Dios del Inframundo"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20022] of  Dios
+
+	(estaLibre TRUE)
+	(nombre "Hermes")
+	(tituloDivino "Mensajero de los dioses"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20023] of  Dios
+
+	(estaLibre TRUE)
+	(nombre "Atenea")
+	(tituloDivino "Diosa de la Sabiduría"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20024] of  ObjetoMagico
+
+	(nombre "Ojo de las Grayas"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20027] of  ObjetoMagico
+
+	(nombre "Zurrón Mágico")
+	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20028]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20028] of  Capacidad
+
+	(nombre "Guardar Cabeza de Medusa"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20029] of  ObjetoMagico
+
+	(nombre "Casco de Hades")
+	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20030]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20030] of  Capacidad
+
+	(nombre "Invisibilidad"))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20031] of  Arma
+
+	(nombre "Escudo de Bronce")
+	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20032]))
+
+([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20032] of  Capacidad
+
+	(nombre "Reflectar"))
