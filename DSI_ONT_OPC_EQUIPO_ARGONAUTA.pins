@@ -1,4 +1,4 @@
-; Tue Oct 20 20:12:52 CEST 2026
+; Thu Nov 05 09:49:23 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -129,7 +129,7 @@
 
 	(estaLibre TRUE)
 	(estaVivo TRUE)
-	(nombre "Dánae"))
+	(nombre "Danae"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20015] of  Heroe
 
@@ -142,7 +142,7 @@
 	(apresadoPor [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004])
 	(estaLibre FALSE)
 	(estaVivo TRUE)
-	(nombre "Andrómeda"))
+	(nombre "Andromeda"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20017] of  Humano
 
@@ -154,7 +154,7 @@
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20018] of  Dios
 
 	(estaLibre TRUE)
-	(nombre "Poseidón")
+	(nombre "Poseidon")
 	(tituloDivino "Dios del los Mares"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20019] of  ObjetoMagico
@@ -190,7 +190,7 @@
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20027] of  ObjetoMagico
 
-	(nombre "Zurrón Mágico")
+	(nombre "Zurron Mágico")
 	(otorgaCapacidad [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20028]))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20028] of  Capacidad

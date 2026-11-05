@@ -1,4 +1,4 @@
-; Tue Oct 20 20:12:52 CEST 2026
+; Thu Nov 05 09:49:23 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -7,42 +7,49 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
-	(single-slot otorgaCapacidad
-		(type INSTANCE)
-;+		(allowed-classes Capacidad)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot localizaA
-;+		(comment "Un ser localiza a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(multislot liberaA
-;+		(comment "Un ser libera a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
 	(multislot esHijoDe
 ;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(cardinality 0 2)
 		(create-accessor read-write))
-	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
+	(multislot tieneElEnojoDe
 		(type INSTANCE)
-;+		(allowed-classes Ser)
-;+		(inverse-slot apresadoPor)
+;+		(allowed-classes Dios)
+		(create-accessor read-write))
+	(single-slot estaVivo
+;+		(comment "True si el mortal esta vivo, falso si no")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default TRUE)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot mataA
 ;+		(comment "Un ser mata a un mortal")
 		(type INSTANCE)
 ;+		(allowed-classes Mortal)
 		(create-accessor read-write))
-	(single-slot nombre
-;+		(comment "Nombre de la instancia")
-		(type STRING)
+	(single-slot estaLibre
+;+		(comment "True si un ser esta libre, false si esta apresado")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default TRUE)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot estaEn
+		(type INSTANCE)
+;+		(allowed-classes Lugar)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot poseeObjeto
+;+		(comment "Relación: Un ser posee un objeto")
+		(type INSTANCE)
+;+		(allowed-classes Objeto)
+		(create-accessor read-write))
+	(multislot localizaA
+;+		(comment "Un ser localiza a otro")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(single-slot apresadoPor
 ;+		(comment "Un ser esta apresado por otro")
@@ -51,48 +58,63 @@
 ;+		(cardinality 0 1)
 ;+		(inverse-slot encierraA)
 		(create-accessor read-write))
-	(multislot tieneElEnojoDe
-		(type INSTANCE)
-;+		(allowed-classes Dios)
-		(create-accessor read-write))
 	(single-slot tituloDivino
 ;+		(comment "De qué es un dios")
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot estaVivo
-;+		(comment "True si el mortal esta vivo, falso si no")
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-		(default TRUE)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot poseeObjeto
-;+		(comment "Relación: Un ser posee un objeto")
+	(multislot encierraA
+;+		(comment "Un ser encierra a otro")
 		(type INSTANCE)
-;+		(allowed-classes Objeto)
+;+		(allowed-classes Ser)
+;+		(inverse-slot apresadoPor)
+		(create-accessor read-write))
+	(single-slot otorgaCapacidad
+		(type INSTANCE)
+;+		(allowed-classes Capacidad)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot tieneElFavorDe
 ;+		(comment "Un mortal tiene el favor de un dios")
 		(type INSTANCE)
 ;+		(allowed-classes Dios)
 		(create-accessor read-write))
-	(single-slot estaEn
-		(type INSTANCE)
-;+		(allowed-classes Lugar)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot estaLibre
-;+		(comment "True si un ser esta libre, false si esta apresado")
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-		(default TRUE)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot liberaA
+;+		(comment "Un ser libera a otro")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
 		(create-accessor read-write)))
 
 (defclass Ser
 	(is-a %3ASYSTEM-CLASS)
 	(role abstract)
+	(single-slot apresadoPor
+;+		(comment "Un ser esta apresado por otro")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot poseeObjeto
+;+		(comment "Relación: Un ser posee un objeto")
+		(type INSTANCE)
+;+		(allowed-classes Objeto)
+		(create-accessor read-write))
+	(multislot localizaA
+;+		(comment "Un ser localiza a otro")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+		(create-accessor read-write))
+	(multislot esHijoDe
+;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+		(cardinality 0 2)
+		(create-accessor read-write))
 	(single-slot estaLibre
 ;+		(comment "True si un ser esta libre, false si esta apresado")
 		(type SYMBOL)
@@ -105,56 +127,30 @@
 		(type INSTANCE)
 ;+		(allowed-classes Mortal)
 		(create-accessor read-write))
-	(multislot liberaA
-;+		(comment "Un ser libera a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
 	(single-slot nombre
 ;+		(comment "Nombre de la instancia")
 		(type STRING)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot esHijoDe
-;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(cardinality 0 2)
-		(create-accessor read-write))
-	(multislot localizaA
-;+		(comment "Un ser localiza a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(single-slot apresadoPor
-;+		(comment "Un ser esta apresado por otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot estaEn
 		(type INSTANCE)
 ;+		(allowed-classes Lugar)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot poseeObjeto
-;+		(comment "Relación: Un ser posee un objeto")
+	(multislot encierraA
+;+		(comment "Un ser encierra a otro")
 		(type INSTANCE)
-;+		(allowed-classes Objeto)
+;+		(allowed-classes Ser)
+		(create-accessor read-write))
+	(multislot liberaA
+;+		(comment "Un ser libera a otro")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
 		(create-accessor read-write)))
 
 (defclass Mortal
 	(is-a Ser)
 	(role abstract)
-	(multislot tieneElEnojoDe
-		(type INSTANCE)
-;+		(allowed-classes Dios)
-		(create-accessor read-write))
 	(multislot tieneElFavorDe
 ;+		(comment "Un mortal tiene el favor de un dios")
 		(type INSTANCE)
@@ -166,6 +162,10 @@
 		(allowed-values FALSE TRUE)
 		(default TRUE)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot tieneElEnojoDe
+		(type INSTANCE)
+;+		(allowed-classes Dios)
 		(create-accessor read-write)))
 
 (defclass Semidios
@@ -220,15 +220,15 @@
 (defclass Objeto
 	(is-a %3ASYSTEM-CLASS)
 	(role abstract)
-	(single-slot otorgaCapacidad
-		(type INSTANCE)
-;+		(allowed-classes Capacidad)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot nombre
 ;+		(comment "Nombre de la instancia")
 		(type STRING)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot otorgaCapacidad
+		(type INSTANCE)
+;+		(allowed-classes Capacidad)
+;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Arma
