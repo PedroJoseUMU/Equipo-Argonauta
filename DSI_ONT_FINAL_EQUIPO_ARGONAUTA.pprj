@@ -1,4 +1,4 @@
-; Thu Nov 05 09:49:23 CET 2026
+; Thu Nov 12 19:57:45 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20414]
-		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20415]
-		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20416]))
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class4]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class5]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class6]))
 
 ([CLSES_TAB] of  Widget
 
@@ -36,6 +36,42 @@
 ([CREATOR_WIDGET] of  Widget
 
 	(name ":CREATOR"))
+
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class4] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class5] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class6] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class7] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class8] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class9] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class1] of  Widget
 
@@ -99,42 +135,6 @@
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20] of  Property_List
 )
-
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20414] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20415] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20416] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20417] of  Map_Entry
-
-	(key "suppress_instance_counting")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20418] of  Map_Entry
-
-	(key "add_name_on_instance_form")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
-
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20419] of  Map_Entry
-
-	(key "change_tracking_active")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class21] of  Widget
 
@@ -497,6 +497,9 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
+([KB_288396_Class3] of  Map
+)
+
 ([KB_600373_Class0] of  String
 
 	(name "factory_class_name")
@@ -505,9 +508,9 @@
 ([KB_600373_Class1] of  Map
 
 	(entries
-		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20417]
-		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20418]
-		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_ProjectKB_Class20419]))
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class7]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class8]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class9]))
 
 ([KB_600373_Class100] of  Property_List
 )
@@ -528,12 +531,12 @@
 ([KB_600373_Class105] of  String
 
 	(name "classes_file_name")
-	(string_value "DSI_ONT_OPC_EQUIPO_ARGONAUTA.pont"))
+	(string_value "DSI_ONT_FINAL_EQUIPO_ARGONAUTA.pont"))
 
 ([KB_600373_Class106] of  String
 
 	(name "instances_file_name")
-	(string_value "DSI_ONT_OPC_EQUIPO_ARGONAUTA.pins"))
+	(string_value "DSI_ONT_FINAL_EQUIPO_ARGONAUTA.pins"))
 
 ([KB_600373_Class83] of  Property_List
 
@@ -599,9 +602,6 @@
 )
 
 ([KB_600373_Class99] of  Property_List
-)
-
-([KB_747106_Class3] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -696,10 +696,10 @@
 
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
-		[STANDARD_CLASS_FORM_WIDGET]
-		[STANDARD_SLOT_FORM_WIDGET]
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
+		[STANDARD_SLOT_FORM_WIDGET]
+		[STANDARD_CLASS_FORM_WIDGET]
 		[PAL_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
 	(default_facet_metaclass ":STANDARD-FACET")

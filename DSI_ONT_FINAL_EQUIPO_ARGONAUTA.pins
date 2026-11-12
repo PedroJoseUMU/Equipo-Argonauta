@@ -1,4 +1,4 @@
-; Thu Nov 05 09:49:23 CET 2026
+; Thu Nov 12 19:57:45 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -7,43 +7,43 @@
 
 	(%3APAL-DESCRIPTION "Para cualquier moral y cualquier dios, no puede ocurrir que ese mortal tenga simultaneamente el faovr y el enojo de ese mismo dios.")
 	(%3APAL-NAME "NoFavorYEnojoSimultaneos")
-	(%3APAL-RANGE "(defrange ?mortal :FRAME Mortal)\n(defrange ?dios :FRAME Diosl)")
+	(%3APAL-RANGE "(defrange ?mortal :FRAME Mortal)\n(defrange ?dios :FRAME Dios)")
 	(%3APAL-STATEMENT "(forall ?mortal\n        (forall ?dios\n                (not \n                     (and \n                          (tieneElFavorDe ?mortal ?dios)\n                          (tieneElEnojoDe ?mortal ?dios)\n	)\n                )\n         )\n)"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10000] of  %3APAL-CONSTRAINT
 
-	(%3APAL-DESCRIPTION "Si un ser libera a otro, la propiedad estaLibre de este ultimo pasa de false a true")
+	(%3APAL-DESCRIPTION "Si un ser libera a otro, el liberado debe estar libre")
 	(%3APAL-NAME "SiLiberadoEntoncesLibre")
 	(%3APAL-RANGE "(defrange ?libertador :FRAME Ser)\n(defrange ?liberado :FRAME Ser)")
-	(%3APAL-STATEMENT "(forall ?libertador\n        (forall ?liberado\n                (=>\n                         (LiberaA ?libertador ?liberado)\n                         (estaLibre ?liberado)\n    )\n  )\n)"))
+	(%3APAL-STATEMENT "(forall ?libertador\n  (forall ?liberado\n    (=>\n      (liberaA ?libertador ?liberado)\n      (= (estaLibre ?liberado) TRUE)\n    )\n  )\n)"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10001] of  %3APAL-CONSTRAINT
 
 	(%3APAL-DESCRIPTION "Si un ser mata a un mortal, la propiedad booleana estaVivo de ese mortal debe ponerse a false (esta a true por defecto)")
 	(%3APAL-NAME "SiMuertoEntoncesNoVivo")
 	(%3APAL-RANGE "(defrange ?ser :FRAME Ser)\n(defrange ?mortal :FRAME Mortal)")
-	(%3APAL-STATEMENT "(forall ?ser\n        (forall ?mortal\n                (=>\n                         (mataA ?ser ?mortal)\n                                             (not(estaVivo ?mortal))\n    )\n  )\n)"))
+	(%3APAL-STATEMENT "(forall ?ser\n   (forall ?mortal\n           (=> \n               (mataA ?ser ?mortal)\n               (= (estaVivo ?mortal) FALSE)\n    )\n  )\n)"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10002] of  %3APAL-CONSTRAINT
 
 	(%3APAL-DESCRIPTION "Si un ser es apresado por otro,")
 	(%3APAL-NAME "SiCapturadoEntoncesNoLibre")
 	(%3APAL-RANGE "(defrange ?captor :FRAME Ser)\n(defrange ?capturado :FRAME Ser)")
-	(%3APAL-STATEMENT "(forall ?captor\n        (forall ?capturado\n                (=>\n                       (encierraA ?captor ?capturado)\n                       (not(estaLibre ?capturado))\n   )\n )\n)"))
+	(%3APAL-STATEMENT "(forall ?captor\n	(forall ?capturado\n                         (=>\n                              (encierraA ?captor ?capturado)\n                               (= (estaLibre ?capturado) 	            FALSE) \n    )\n  ) \n)"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10003] of  %3APAL-CONSTRAINT
 
 	(%3APAL-DESCRIPTION "Si un ser mata a un mortal, este ser no puede ser un mortal muerto")
 	(%3APAL-NAME "MuertosNoMatan")
 	(%3APAL-RANGE "(defrange ?ser :FRAME Ser)\n(defrange ?mortal :FRAME Mortal)")
-	(%3APAL-STATEMENT "(forall ?ser\n        (forall ?mortal\n                (=>\n                     (and\n                               (mataA ?ser ?mortal)\n                                (instance-of ?ser Mortal)\n                      )\n                      (estaVivo ?ser) \n    )\n  )\n)"))
+	(%3APAL-STATEMENT "(forall ?ser\n        (forall ?mortal\n                (=>\n                        (and \n                             (mataA ?ser ?mortal)\n                             (instance-of ?ser Mortal)\n      )\n                                            (= (estaVivo ?ser) TRUE)\n    )\n  )\n)\n"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class10004] of  %3APAL-CONSTRAINT
 
 	(%3APAL-DESCRIPTION "Para que un ser encirre a otro, este debe estar libre")
 	(%3APAL-NAME "SoloLibresCapturan")
-	(%3APAL-RANGE "(defrange ?ser :FRAME captor)\n(defrange ?ser :FRAME capturado)")
-	(%3APAL-STATEMENT "(forall ?captor\n        (forall ?capturado\n                (=>\n                    (encierraA ?captor ?capturado)\n                    (estaLibre ?captor)\n   )\n )\n)"))
+	(%3APAL-RANGE "(defrange ?captor :FRAME Ser)\n(defrange ?capturado :FRAME Ser)")
+	(%3APAL-STATEMENT "(forall ?captor\n     (forall ?capturado\n             (=>\n                        (encierraA ?captor ?capturado)\n                                         (= (estaLibre ?captor) 	                 TRUE)\n      )\n   ) \n)"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20001] of  Dios
 
@@ -106,6 +106,7 @@
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20012] of  Semidios
 
+	(esHeroe TRUE)
 	(esHijoDe
 		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20001]
 		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20013])
@@ -127,25 +128,22 @@
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20013] of  Humano
 
+	(esHeroe FALSE)
 	(estaLibre TRUE)
 	(estaVivo TRUE)
 	(nombre "Danae"))
 
-([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20015] of  Heroe
-
-	(estaLibre TRUE)
-	(estaVivo TRUE)
-	(nombre "Teseo"))
-
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20016] of  Humano
 
 	(apresadoPor [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004])
+	(esHeroe FALSE)
 	(estaLibre FALSE)
 	(estaVivo TRUE)
 	(nombre "Andromeda"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20017] of  Humano
 
+	(esHeroe FALSE)
 	(estaLibre TRUE)
 	(estaVivo TRUE)
 	(nombre "Casiopea")
