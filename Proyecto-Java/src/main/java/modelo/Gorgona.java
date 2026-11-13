@@ -1,4 +1,4 @@
-package mitos;
+package modelo;
 
 public class Gorgona extends Criatura {
 

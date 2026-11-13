@@ -1,4 +1,4 @@
-package mitos;
+package modelo;
 
 public class Dios extends Inmortal {
 
