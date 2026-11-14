@@ -1,4 +1,4 @@
-; Sat Nov 14 16:31:00 CET 2026
+; Sat Nov 14 19:46:17 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -8,12 +8,13 @@
 	(is-a USER)
 	(role abstract)
 	(single-slot otorgaCapacidad
+;+		(comment "Un objeto otorga una capacidad")
 		(type INSTANCE)
 ;+		(allowed-classes Capacidad)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot localizaA
-;+		(comment "Un ser localiza a otro")
+;+		(comment "Relacion: Un ser localiza a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
@@ -25,24 +26,24 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot liberaA
-;+		(comment "Un ser libera a otro")
+;+		(comment "Relacion: Un ser libera a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(multislot esHijoDe
-;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(cardinality 0 2)
 		(create-accessor read-write))
 	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
+;+		(comment "Relacion: Un ser encierra a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 ;+		(inverse-slot apresadoPor)
 		(create-accessor read-write))
+	(multislot esHijoDe
+;+		(comment "Relacion: Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+		(cardinality 0 2)
+		(create-accessor read-write))
 	(multislot mataA
-;+		(comment "Un ser mata a un mortal")
+;+		(comment "Relacion: Un ser mata a un mortal")
 		(type INSTANCE)
 ;+		(allowed-classes Mortal)
 		(create-accessor read-write))
@@ -52,18 +53,19 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot apresadoPor
-;+		(comment "Un ser esta apresado por otro")
+;+		(comment "Relacion: Un ser esta apresado por otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 ;+		(cardinality 0 1)
 ;+		(inverse-slot encierraA)
 		(create-accessor read-write))
 	(multislot tieneElEnojoDe
+;+		(comment "Relacion: Un ser tiene el enojo de otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(single-slot tituloDivino
-;+		(comment "De qué es un dios")
+;+		(comment "De que es un dios")
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
@@ -75,91 +77,94 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot poseeObjeto
-;+		(comment "Relación: Un ser posee un objeto")
+;+		(comment "Relacion: Un ser posee un objeto")
 		(type INSTANCE)
 ;+		(allowed-classes Objeto)
 		(create-accessor read-write))
 	(multislot tieneElFavorDe
-;+		(comment "Un mortal tiene el favor de un dios")
+;+		(comment "Relacion: Un mortal tiene el favor de un dios")
 		(type INSTANCE)
 ;+		(allowed-classes Dios)
 		(create-accessor read-write))
 	(single-slot estaEn
+;+		(comment "Relacion: Un ser se encuentra en un lugar")
 		(type INSTANCE)
 ;+		(allowed-classes Lugar)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot estaLibre
-;+		(comment "True si un ser esta libre, false si esta apresado")
+;+		(comment "Relacion: True si un ser esta libre, false si esta apresado")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 		(default TRUE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Ser
+(defclass Ser "Clase abstracta que representa a los distintos seres o personajes que son importantes en un mito"
 	(is-a %3ASYSTEM-CLASS)
 	(role abstract)
+	(multislot mataA
+;+		(comment "Relacion: Un ser mata a un mortal")
+		(type INSTANCE)
+;+		(allowed-classes Mortal)
+		(create-accessor read-write))
 	(single-slot estaLibre
-;+		(comment "True si un ser esta libre, false si esta apresado")
+;+		(comment "Relacion: True si un ser esta libre, false si esta apresado")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 		(default TRUE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot mataA
-;+		(comment "Un ser mata a un mortal")
+	(multislot liberaA
+;+		(comment "Relacion: Un ser libera a otro")
 		(type INSTANCE)
-;+		(allowed-classes Mortal)
+;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(multislot tieneElEnojoDe
+;+		(comment "Relacion: Un ser tiene el enojo de otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
-	(multislot liberaA
-;+		(comment "Un ser libera a otro")
+	(multislot encierraA
+;+		(comment "Relacion: Un ser encierra a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(multislot localizaA
-;+		(comment "Un ser localiza a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(multislot esHijoDe
-;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(cardinality 0 2)
 		(create-accessor read-write))
 	(single-slot nombre
 ;+		(comment "Nombre de la instancia")
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
+	(multislot esHijoDe
+;+		(comment "Relacion: Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+		(cardinality 0 2)
+		(create-accessor read-write))
+	(multislot localizaA
+;+		(comment "Relacion: Un ser localiza a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(single-slot apresadoPor
-;+		(comment "Un ser esta apresado por otro")
+;+		(comment "Relacion: Un ser esta apresado por otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot estaEn
+;+		(comment "Relacion: Un ser se encuentra en un lugar")
 		(type INSTANCE)
 ;+		(allowed-classes Lugar)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot poseeObjeto
-;+		(comment "Relación: Un ser posee un objeto")
+;+		(comment "Relacion: Un ser posee un objeto")
 		(type INSTANCE)
 ;+		(allowed-classes Objeto)
 		(create-accessor read-write)))
 
-(defclass Mortal
+(defclass Mortal "Clase abstracta que representa a los personajes de un mito que se consideran mortales (pueden morir)"
 	(is-a Ser)
 	(role abstract)
 	(single-slot esHeroe
@@ -169,12 +174,8 @@
 		(default FALSE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot tieneElEnojoDe
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(create-accessor read-write))
 	(multislot tieneElFavorDe
-;+		(comment "Un mortal tiene el favor de un dios")
+;+		(comment "Relacion: Un mortal tiene el favor de un dios")
 		(type INSTANCE)
 ;+		(allowed-classes Dios)
 		(create-accessor read-write))
@@ -186,59 +187,60 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Semidios
+(defclass Semidios "Clase que representa a los hijos de un Dios y un Mortal"
 	(is-a Mortal)
 	(role concrete))
 
-(defclass Criatura
+(defclass Criatura "Clase abstracta que representa a las distintas criaturas que pueden participar en un mito"
 	(is-a Mortal)
 	(role abstract))
 
-(defclass Gorgona
+(defclass Gorgona "Clase que representa a las Gorgonas (por ejemplo, Medusa)"
 	(is-a Criatura)
 	(role concrete))
 
-(defclass CriaturaMarina
+(defclass CriaturaMarina "Clase que representa a las Criaturas marinas (por ejemplo, Ceto)"
 	(is-a Criatura)
 	(role concrete))
 
-(defclass Minotauro
+(defclass Minotauro "Clase que representa a los Minotauros (como el del mito del laberinto de Creta)"
 	(is-a Criatura)
 	(role concrete))
 
-(defclass Humano
+(defclass Humano "Clase que representa a los Mortales puros, que no son hijos de Dioses"
 	(is-a Mortal)
 	(role concrete))
 
-(defclass Inmortal
+(defclass Inmortal "Clase abstracta que representa a los personajes de un mito que se consideran inmortales (no pueden morir)"
 	(is-a Ser)
 	(role abstract))
 
-(defclass Dios
+(defclass Dios "Clase que representa a los dioses importantes de la mitologia griega y que pueden participar en un mito (por ejemplo, Zeus y Poseidon)"
 	(is-a Inmortal)
 	(role concrete)
 	(single-slot tituloDivino
-;+		(comment "De qué es un dios")
+;+		(comment "De que es un dios")
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass DiosMenor
+(defclass DiosMenor "Clase abstracta que representa a seres divinos de menor rango que otros dioses como Zeus o Poseidon"
 	(is-a Inmortal)
 	(role abstract))
 
-(defclass Graya
+(defclass Graya "Clase que representa a las Grayas (que son tres diosas menores)"
 	(is-a DiosMenor)
 	(role concrete))
 
-(defclass Ninfa
+(defclass Ninfa "Clase que representa a las ninfas, espiritus de la naturaleza que se consideran diosas menores en la mitologia griega"
 	(is-a DiosMenor)
 	(role concrete))
 
-(defclass Objeto
+(defclass Objeto "Clase abstracta que representa los distintos objetos que juegan un papel importante en un mito"
 	(is-a %3ASYSTEM-CLASS)
 	(role abstract)
 	(single-slot otorgaCapacidad
+;+		(comment "Un objeto otorga una capacidad")
 		(type INSTANCE)
 ;+		(allowed-classes Capacidad)
 ;+		(cardinality 0 1)
@@ -249,15 +251,15 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Arma
+(defclass Arma "Clase que representa a los objetos que se reconocen como armas (por ejemplo, una espada)"
 	(is-a Objeto)
 	(role concrete))
 
-(defclass ObjetoMagico
+(defclass ObjetoMagico "Clase que representa objetos de naturaleza magica o sobrenatural, pero que no son armas per se (por ejemplo, las sandalias aladas)"
 	(is-a Objeto)
 	(role concrete))
 
-(defclass Capacidad
+(defclass Capacidad "Clase que representa las capacidades especiales de un ser (por ejemplo, volar)"
 	(is-a %3ASYSTEM-CLASS)
 	(role concrete)
 	(single-slot nombre
@@ -266,7 +268,7 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Lugar
+(defclass Lugar "Clase que representa las distintas localizaciones que puede haber en un mito"
 	(is-a %3ASYSTEM-CLASS)
 	(role concrete)
 	(single-slot nombre
