@@ -1,4 +1,4 @@
-; Sat Nov 14 15:27:09 CET 2026
+; Sat Nov 14 16:31:00 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -29,17 +29,17 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
-	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-;+		(inverse-slot apresadoPor)
-		(create-accessor read-write))
 	(multislot esHijoDe
 ;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(cardinality 0 2)
+		(create-accessor read-write))
+	(multislot encierraA
+;+		(comment "Un ser encierra a otro")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+;+		(inverse-slot apresadoPor)
 		(create-accessor read-write))
 	(multislot mataA
 ;+		(comment "Un ser mata a un mortal")
@@ -60,7 +60,7 @@
 		(create-accessor read-write))
 	(multislot tieneElEnojoDe
 		(type INSTANCE)
-;+		(allowed-classes Dios)
+;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(single-slot tituloDivino
 ;+		(comment "De qué es un dios")
@@ -100,11 +100,6 @@
 (defclass Ser
 	(is-a %3ASYSTEM-CLASS)
 	(role abstract)
-	(multislot mataA
-;+		(comment "Un ser mata a un mortal")
-		(type INSTANCE)
-;+		(allowed-classes Mortal)
-		(create-accessor read-write))
 	(single-slot estaLibre
 ;+		(comment "True si un ser esta libre, false si esta apresado")
 		(type SYMBOL)
@@ -112,20 +107,24 @@
 		(default TRUE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot mataA
+;+		(comment "Un ser mata a un mortal")
+		(type INSTANCE)
+;+		(allowed-classes Mortal)
+		(create-accessor read-write))
+	(multislot tieneElEnojoDe
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+		(create-accessor read-write))
 	(multislot liberaA
 ;+		(comment "Un ser libera a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
-	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
+	(multislot localizaA
+;+		(comment "Un ser localiza a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
-		(create-accessor read-write))
-	(single-slot nombre
-;+		(comment "Nombre de la instancia")
-		(type STRING)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot esHijoDe
 ;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
@@ -133,8 +132,13 @@
 ;+		(allowed-classes Ser)
 		(cardinality 0 2)
 		(create-accessor read-write))
-	(multislot localizaA
-;+		(comment "Un ser localiza a otro")
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot encierraA
+;+		(comment "Un ser encierra a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
@@ -167,7 +171,7 @@
 		(create-accessor read-write))
 	(multislot tieneElEnojoDe
 		(type INSTANCE)
-;+		(allowed-classes Dios)
+;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(multislot tieneElFavorDe
 ;+		(comment "Un mortal tiene el favor de un dios")
@@ -195,6 +199,10 @@
 	(role concrete))
 
 (defclass CriaturaMarina
+	(is-a Criatura)
+	(role concrete))
+
+(defclass Minotauro
 	(is-a Criatura)
 	(role concrete))
 
