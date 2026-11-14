@@ -1,7 +1,7 @@
 package modelo;
 
 public abstract class Objeto {
-	private String nombre;
+	private final String nombre;
 
 	public Objeto(String nombre) {
 		super();
@@ -12,9 +12,6 @@ public abstract class Objeto {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	@Override
 	public int hashCode() {

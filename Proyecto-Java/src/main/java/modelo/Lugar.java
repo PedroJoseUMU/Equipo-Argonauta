@@ -1,7 +1,7 @@
 package modelo;
 
 public class Lugar {
-	private String nombre;
+	private final String nombre;
 
 	public Lugar(String nombre) {
 		super();
@@ -12,9 +12,7 @@ public class Lugar {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+
 
 	@Override
 	public int hashCode() {

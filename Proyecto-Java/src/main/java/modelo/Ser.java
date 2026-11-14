@@ -1,14 +1,12 @@
 package modelo;
 
 public abstract class Ser {
-	private String nombre;
+	private final String nombre;
     private boolean estaLibre = true;
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+
 	public boolean isEstaLibre() {
 		return estaLibre;
 	}

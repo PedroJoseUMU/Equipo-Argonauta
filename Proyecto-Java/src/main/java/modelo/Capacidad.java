@@ -1,7 +1,7 @@
 package modelo;
 
 public class Capacidad {
-	private String nombre;
+	private final String nombre;
 
 	public Capacidad(String nombre) {
 		super();
@@ -12,9 +12,6 @@ public class Capacidad {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	@Override
 	public int hashCode() {
