@@ -1,4 +1,4 @@
-; Thu Nov 12 19:57:45 CET 2026
+; Sat Nov 14 15:27:09 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -106,7 +106,6 @@
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20012] of  Semidios
 
-	(esHeroe TRUE)
 	(esHijoDe
 		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20001]
 		[DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20013])
@@ -128,7 +127,6 @@
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20013] of  Humano
 
-	(esHeroe FALSE)
 	(estaLibre TRUE)
 	(estaVivo TRUE)
 	(nombre "Danae"))
@@ -136,14 +134,12 @@
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20016] of  Humano
 
 	(apresadoPor [DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20004])
-	(esHeroe FALSE)
 	(estaLibre FALSE)
 	(estaVivo TRUE)
 	(nombre "Andromeda"))
 
 ([DSI_ONT_OPC_EQUIPO_ARGONAUTA_Class20017] of  Humano
 
-	(esHeroe FALSE)
 	(estaLibre TRUE)
 	(estaVivo TRUE)
 	(nombre "Casiopea")

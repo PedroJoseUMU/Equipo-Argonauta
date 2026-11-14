@@ -1,4 +1,4 @@
-; Thu Nov 12 19:57:45 CET 2026
+; Sat Nov 14 15:27:09 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -18,9 +18,10 @@
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
 	(single-slot esHeroe
-;+		(comment "Si true, entonces el humano o semidios es heroe (alguien con logros extraordinarios en un mito). En otro caso, no es heroe.")
+;+		(comment "Si true, entonces el mortal es heroe (alguien con logros extraordinarios en un mito). En otro caso, no es heroe.")
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
+		(default FALSE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot liberaA
@@ -28,17 +29,17 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
-	(multislot esHijoDe
-;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
-		(type INSTANCE)
-;+		(allowed-classes Ser)
-		(cardinality 0 2)
-		(create-accessor read-write))
 	(multislot encierraA
 ;+		(comment "Un ser encierra a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 ;+		(inverse-slot apresadoPor)
+		(create-accessor read-write))
+	(multislot esHijoDe
+;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
+		(type INSTANCE)
+;+		(allowed-classes Ser)
+		(cardinality 0 2)
 		(create-accessor read-write))
 	(multislot mataA
 ;+		(comment "Un ser mata a un mortal")
@@ -99,6 +100,11 @@
 (defclass Ser
 	(is-a %3ASYSTEM-CLASS)
 	(role abstract)
+	(multislot mataA
+;+		(comment "Un ser mata a un mortal")
+		(type INSTANCE)
+;+		(allowed-classes Mortal)
+		(create-accessor read-write))
 	(single-slot estaLibre
 ;+		(comment "True si un ser esta libre, false si esta apresado")
 		(type SYMBOL)
@@ -106,20 +112,20 @@
 		(default TRUE)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot mataA
-;+		(comment "Un ser mata a un mortal")
-		(type INSTANCE)
-;+		(allowed-classes Mortal)
-		(create-accessor read-write))
 	(multislot liberaA
 ;+		(comment "Un ser libera a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
-	(multislot localizaA
-;+		(comment "Un ser localiza a otro")
+	(multislot encierraA
+;+		(comment "Un ser encierra a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot esHijoDe
 ;+		(comment "Un ser es hijo de otro (en particular, un semidios es hijo de un dios)")
@@ -127,13 +133,8 @@
 ;+		(allowed-classes Ser)
 		(cardinality 0 2)
 		(create-accessor read-write))
-	(single-slot nombre
-;+		(comment "Nombre de la instancia")
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot encierraA
-;+		(comment "Un ser encierra a otro")
+	(multislot localizaA
+;+		(comment "Un ser localiza a otro")
 		(type INSTANCE)
 ;+		(allowed-classes Ser)
 		(create-accessor read-write))
@@ -157,6 +158,13 @@
 (defclass Mortal
 	(is-a Ser)
 	(role abstract)
+	(single-slot esHeroe
+;+		(comment "Si true, entonces el mortal es heroe (alguien con logros extraordinarios en un mito). En otro caso, no es heroe.")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot tieneElEnojoDe
 		(type INSTANCE)
 ;+		(allowed-classes Dios)
@@ -176,13 +184,7 @@
 
 (defclass Semidios
 	(is-a Mortal)
-	(role concrete)
-	(single-slot esHeroe
-;+		(comment "Si true, entonces el humano o semidios es heroe (alguien con logros extraordinarios en un mito). En otro caso, no es heroe.")
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+	(role concrete))
 
 (defclass Criatura
 	(is-a Mortal)
@@ -198,13 +200,7 @@
 
 (defclass Humano
 	(is-a Mortal)
-	(role concrete)
-	(single-slot esHeroe
-;+		(comment "Si true, entonces el humano o semidios es heroe (alguien con logros extraordinarios en un mito). En otro caso, no es heroe.")
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+	(role concrete))
 
 (defclass Inmortal
 	(is-a Ser)
