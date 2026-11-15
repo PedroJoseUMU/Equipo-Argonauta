@@ -1,0 +1,24 @@
+package relaciones;
+
+import modelo.Objeto;
+import modelo.Ser;
+
+public class NoPoseeObjeto {
+	private final Ser ser;
+	private final Objeto objeto;
+	public NoPoseeObjeto(Ser ser, Objeto objeto) {
+		super();
+		this.ser = ser;
+		this.objeto = objeto;
+	}
+	public Ser getSer() {
+		return ser;
+	}
+	public Objeto getObjeto() {
+		return objeto;
+	}
+	@Override
+	public String toString() {
+		return ser + " no posee " + objeto;
+	}
+}
