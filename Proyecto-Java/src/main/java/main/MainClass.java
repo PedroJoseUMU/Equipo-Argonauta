@@ -1,6 +1,6 @@
 package main;
 
-import java.nio.file.Paths;
+import java.io.File;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -10,7 +10,7 @@ import io.ConocimientoInicial;
 import io.Lector;
 
 public class MainClass {
-	public static  void main(String[] args) {
+	public static  void main(String[] args) throws Exception {
 		String escenarios = "escenarios";
         String soluciones = "soluciones";
         if (args.length >= 1) escenarios = args[0];
@@ -18,22 +18,32 @@ public class MainClass {
 
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
-        KieSession session = kc.newKieSession("ksession-mitos");
+        
+        for (int i = 1; i <= 8; i++) {
+            File f = new File(escenarios, "Escenario.F2-" + i + ".txt");
+            if (!f.exists()) {
+            	System.out.println("No existe: " + f.getAbsolutePath());
+            	continue;}
 
-        ConocimientoInicial ci = new ConocimientoInicial();
-        for (Object h : ci.getHechos()) session.insert(h);
+            KieSession session = kc.newKieSession("ksession-mitos");
 
-        //Lector lector = new Lector(ci.getSeres(), ci.getObjetos());
-        //for (Object h : lector.leer(Paths.get(escenarios, "Escenario.F2-1.txt"))) session.insert(h);
+            ConocimientoInicial ci = new ConocimientoInicial();
+            for (Object h : ci.getHechos()) session.insert(h);
 
-        session.getAgenda().getAgendaGroup("Condiciones iniciales").setFocus();
-        session.fireAllRules();
-        session.getAgenda().getAgendaGroup("Informacion Inicial").setFocus();
-        session.fireAllRules();
+            Lector lector = new Lector(ci.getSeres(), ci.getObjetos());
+            for (Object h : lector.leer(f.getPath())) session.insert(h);
 
-        System.out.println("Hechos:");
-        for (Object o : session.getObjects()) System.out.println(o);
+            session.getAgenda().getAgendaGroup("Condiciones iniciales").setFocus();
+            session.fireAllRules();
+            session.getAgenda().getAgendaGroup("Informacion Inicial").setFocus();
+            session.fireAllRules();
 
-        session.dispose();
+            System.out.println("Escenario " + i + " - hechos:");
+            for (Object o : session.getObjects()) System.out.println(o);
+
+            session.dispose();
+        }
+        
+        
 	}
 }
