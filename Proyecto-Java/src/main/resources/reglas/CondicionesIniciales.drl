@@ -1,0 +1,16 @@
+package reglas
+
+//list any import classes here.
+import modelo.*;
+import relaciones.*;
+
+// REGLA 1: APLICA LA CONDICION DE NO POSEER UN OBJETO
+rule "No posee objeto"
+agenda-group "Condiciones iniciales"
+when
+    $n : NoPoseeObjeto($s : ser, $o : objeto)
+    $p : PoseeObjeto(ser == $s, objeto == $o)
+then
+    delete($p);
+    delete($n);
+end

@@ -1,20 +1,79 @@
 package reglas
 
+import modelo.*;
+import relaciones.*;
+import io.Pregunta;
 
-rule "Your First Rule"
-
-    when
-        //conditions
-    then
-        //actions
-
+rule "Mostrar mortales vivos y libres"
+agenda-group "Informacion Inicial"
+when
+    $m : Mortal(estaVivo == true, estaLibre == true)
+then
+    System.out.println($m + " presente y vivo y libre");
 end
 
-rule "Your Second Rule"
-    //include attributes such as "salience" here...
-    when
-        //conditions
-    then
-        //actions
+rule "Mostrar mortales vivos y presos"
+agenda-group "Informacion Inicial"
+when
+    $m : Mortal(estaVivo == true, estaLibre == false)
+then
+    System.out.println($m + " presente y vivo y preso");
+end
 
+rule "Mostrar inmortales"
+agenda-group "Informacion Inicial"
+when
+    $i : Inmortal()
+then
+    System.out.println($i + " presente e inmortal");
+end
+
+rule "Mostrar posesiones"
+agenda-group "Informacion Inicial"
+when
+    $p : PoseeObjeto()
+then
+    System.out.println($p);
+end
+
+rule "Mostrar enojos"
+agenda-group "Informacion Inicial"
+when
+    $e : TieneEnojo()
+then
+    System.out.println($e);
+end
+
+rule "Mostrar favores"
+agenda-group "Informacion Inicial"
+when
+    $f : TieneFavor()
+then
+    System.out.println($f);
+end
+
+rule "Mostrar capacidades"
+agenda-group "Informacion Inicial"
+when
+    TieneCapacidad($s : ser, $c : capacidad)
+then
+    System.out.println($s + " tiene la capacidad " + $c);
+end
+
+rule "Mostrar mortales sin capacidades"
+agenda-group "Informacion Inicial"
+when
+    $m : Mortal()
+    not TieneCapacidad(ser == $m)
+then
+    System.out.println($m + " tiene Capacidades: Ninguna");
+end
+
+
+rule "Mostrar pregunta"
+agenda-group "Informacion Inicial"
+when
+    $q : Pregunta()
+then
+    System.out.println($q);
 end

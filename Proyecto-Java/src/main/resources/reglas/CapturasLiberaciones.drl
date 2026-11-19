@@ -26,20 +26,25 @@ import relaciones.OtorgaCapacidad;
 
 // REGLA 1: POSEIDON LIBERA A CETO SI ALGUIEN TIENE SU ENOJO
 rule "Poseidon enojado libera a ceto"
+agenda-group "Historias"
+
 
     when
         $poseidon : Dios(nombre == "Poseidon")
-        TieneEnojo(enojado == $poseidon)
+        TieneEnojo($progenitor : ser,enojado == $poseidon)
         $ceto : CriaturaMarina(nombre == "Ceto", estaVivo == true, estaLibre == false)
         not Libera(preso == $ceto)
         
     then
+        System.out.println($ceto+ " queda libre debido al enojo de "+ $poseidon+ " hacia " + $progenitor+".");
         insert (new Libera($poseidon, $ceto));
 
 end
 
 // REGLA 2: CETO CAPTURA AL HIJO O HIJA DE LA PERSONA QUE TIENE EL ENOJO DE POSEIDON
 rule "Ceto captura hijo de quien enoja a poseidon"
+agenda-group "Historias"
+
     
     when
         $poseidon : Dios(nombre == "Poseidon")
@@ -51,11 +56,14 @@ rule "Ceto captura hijo de quien enoja a poseidon"
         not Libera(preso == $apresado)
         
     then
+        System.out.println($apresado+ " queda presa debido a estar "+ $ceto+ " libre.");
     	insert(new Apresa($ceto, $apresado));
 end
         
 // REGLA 3: MINOS ENVIA AL LABERINTO DE CRETA A UN SER QUE TIENE SU ENOJO (PARA PERSONAJES QUE YA TIENEN UBICACION)
 rule "Minos enojado envia a alguien con ubicacion al laberinto"
+agenda-group "Historias"
+
     
     when
         $minos : Humano(nombre == "Minos", estaVivo == true, estaLibre == true)
@@ -66,12 +74,15 @@ rule "Minos enojado envia a alguien con ubicacion al laberinto"
     	not Libera(preso == $apresado)
      
     then
+    	System.out.println($apresado + " es enviado al "+ $laberinto +" debido al enojo de "+$minos+ "." );
     	delete($ubicacionAnterior);
     	insert(new EstaEn($apresado, $laberinto));
 end
 
 // REGLA 4: MINOS ENVIA AL LABERINTO DE CRETA A UN SER QUE TIENE SU ENOJO (PARA PERSONAJES SIN UBICACION INICIAL)
 rule "Minos enojado envia a alguien sin ubicacion al laberinto"
+agenda-group "Historias"
+
     
     when
     	$minos : Humano(nombre == "Minos", estaVivo == true, estaLibre == true)
@@ -82,12 +93,14 @@ rule "Minos enojado envia a alguien sin ubicacion al laberinto"
     	not Libera(preso == $apresado)
         
     then
+    	System.out.println($apresado + " es enviado al "+ $laberinto +" debido al enojo de "+$minos+ "." );
         insert(new EstaEn($apresado, $laberinto));
 end
        
 //REGLA 5: EL MINOTAURO CAPTURA A UN MORTAL EN EL LABERINTO, EN CASO DE QUE NO TENGA EL HILO DE ARIADNA
 // NO SE EXIGE QUE EL PROPIO MINOTAURO ESTE LIBRE PORQUE, DE HECHO, VIVE ENCERRADO EN EL LABERINTO
 rule "Minotauro captura intruso en el laberinto"
+agenda-group "Historias"
     
     when
     	$laberinto : Lugar(nombre == "Laberinto")
@@ -100,11 +113,13 @@ rule "Minotauro captura intruso en el laberinto"
     	not Libera(preso == $intruso)
         
     then
+    	System.out.println($intruso + " es apresado en el "+ $laberinto +" por "+$minotauro+ "." );
     	insert(new Apresa($minotauro, $intruso));
 end
         
 //REGLA 6: UN SER APRESADO YA NO ES LIBRE
 rule "Ser apresado ya no es libre"
+agenda-group "Historias"
     
     when
         Apresa($preso : preso)
@@ -116,6 +131,7 @@ end
 
 //REGLA 7: LA MUERTE DE UN CAPTOR IMPLICA LA LIBERACION DE SUS PRESOS POR SU ASESINO
 rule "Muerte de un captor libera presos"
+agenda-group "Historias"
     
     when
          Mata($libertador : asesino, $victima : asesinado)
@@ -125,11 +141,14 @@ rule "Muerte de un captor libera presos"
     	 not Libera(preso == $apresado)
         
     then
+    	System.out.println($apresado + " es liberado debido a la muerte de "+$victima+ "." );
         insert(new Libera($libertador, $preso));
 end
 
 // REGLA 8: TODO SER QUE HAYA SIDO LIBERADO PASA A ESTAR LIBRE
 rule "Todo ser liberado pasa a estar libre"
+agenda-group "Historias"
+
     when
     	Libera($preso : preso)
     	$liberado : Ser(this == $preso, estaLibre == false)
@@ -139,6 +158,8 @@ end
 
 // REGLA 9: TODO SER QUE HAYA SIDO LIBERADO YA NO ESTA APRESADO   
 rule "Todo ser liberado no esta apresado"
+agenda-group "Historias"
+
     when
         Libera($liberado : preso)
         $captura : Apresa(preso == $liberado)
@@ -149,6 +170,8 @@ end
 // REGLA 10: UN HEROE CON EL HILO DE ARIADNA RESCATA A UN PRESO DEL MINOTAURO
 // SE REQUIERE QUE EL HEROE HAYA LOCALIZADO AL PRESO, Y QUE TANTO HEROE COMO PRESO ESTEN EN EL LABERINTO DE CRETA
 rule "Heroe rescata a preso en el laberinto"
+agenda-group "Historias"
+
     when
     	$laberinto : Lugar(nombre == "Laberinto")
     	$heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
@@ -164,6 +187,7 @@ rule "Heroe rescata a preso en el laberinto"
 		EstaEn(ser == $preso, lugar == $lugar)
         
     then
+    	System.out.println($preso + " es liberado por "+ $heroe +" en el "+$laberinto+ "." );
     	insert(new Libera($heroe, $preso));
 
 end
@@ -171,6 +195,8 @@ end
 // REGLA 11: UN HEROE DISTINTO PUEDE LIBERAR A UN PRESO DE FORMA SIGILOSA
 // SE REQUIERE QUE POSEA UN OBJETO QUE OTORGUE INVISIBILIDAD Y HAYA LOCALIZADO AL PRESO
 rule "Otro heroe invisible rescata a preso"
+agenda-group "Historias"
+
     when
       $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
       PoseeObjeto(ser == $heroe, $objeto : objeto)
@@ -182,6 +208,7 @@ rule "Otro heroe invisible rescata a preso"
       not Libera(preso == $preso)
       
     then
+        System.out.println($preso + " es liberado por "+ $heroe + " de forma sigilosa." );
     	insert(new Libera($heroe, $preso));
 end
         

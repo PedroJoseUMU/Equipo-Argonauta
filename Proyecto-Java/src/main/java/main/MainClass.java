@@ -22,11 +22,10 @@ public class MainClass {
         for (int i = 1; i <= 8; i++) {
             File f = new File(escenarios, "Escenario.F2-" + i + ".txt");
             if (!f.exists()) {
-            	System.out.println("No existe: " + f.getAbsolutePath());
             	continue;}
-
+            System.out.println("Escenario " + i + " - hechos:");
             KieSession session = kc.newKieSession("ksession-mitos");
-
+            
             ConocimientoInicial ci = new ConocimientoInicial();
             for (Object h : ci.getHechos()) session.insert(h);
 
@@ -37,9 +36,8 @@ public class MainClass {
             session.fireAllRules();
             session.getAgenda().getAgendaGroup("Informacion Inicial").setFocus();
             session.fireAllRules();
-
-            System.out.println("Escenario " + i + " - hechos:");
-            for (Object o : session.getObjects()) System.out.println(o);
+            session.getAgenda().getAgendaGroup("Historias").setFocus();
+            session.fireAllRules();
 
             session.dispose();
         }

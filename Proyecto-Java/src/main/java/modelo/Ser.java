@@ -10,6 +10,7 @@ public abstract class Ser {
 	public boolean isEstaLibre() {
 		return estaLibre;
 	}
+
 	public void setEstaLibre(boolean estaLibre) {
 		this.estaLibre = estaLibre;
 	}

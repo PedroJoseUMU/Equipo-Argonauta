@@ -2,7 +2,7 @@ package relaciones;
 
 import modelo.Ser;
 
-public class Libera {
+public class Libera  {
 	private final Ser liberador;
 	private final Ser preso;
 	public Libera(Ser liberador, Ser preso) {
