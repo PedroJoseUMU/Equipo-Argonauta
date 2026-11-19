@@ -1,0 +1,187 @@
+//created on: 19 nov. 2026
+package reglas;
+
+//list any import classes here.
+import modelo.Ser;
+import modelo.Mortal;
+import modelo.Humano;
+import modelo.Dios;
+import modelo.CriaturaMarina;
+import modelo.Minotauro;
+import modelo.Lugar;
+
+import relaciones.Apresa;
+import relaciones.Libera;
+import relaciones.Mata;
+import relaciones.HijoDe;
+import relaciones.TieneEnojo;
+import relaciones.EstaEn;
+import relaciones.Localiza;
+import relaciones.PoseeObjeto;
+import relaciones.OtorgaCapacidad;
+
+// REGLAS PARA CAPTURAS Y LIBERACIONES DE SERES
+// Este primer modelo admite solo una captura por personaje y escenario
+// not Libera(...) evita que reaparezcan capturas tras un rescate
+
+// REGLA 1: POSEIDON LIBERA A CETO SI ALGUIEN TIENE SU ENOJO
+rule "Poseidon enojado libera a ceto"
+
+    when
+        $poseidon : Dios(nombre == "Poseidon")
+        TieneEnojo(enojado == $poseidon)
+        $ceto : CriaturaMarina(nombre == "Ceto", estaVivo == true, estaLibre == false)
+        not Libera(preso == $ceto)
+        
+    then
+        insert (new Libera($poseidon, $ceto));
+
+end
+
+// REGLA 2: CETO CAPTURA AL HIJO O HIJA DE LA PERSONA QUE TIENE EL ENOJO DE POSEIDON
+rule "Ceto captura hijo de quien enoja a poseidon"
+    
+    when
+        $poseidon : Dios(nombre == "Poseidon")
+        TieneEnojo($progenitor: ser, enojado == $poseidon)
+        HijoDe($hijo : hijo, padre == $progenitor)
+        $apresado : Mortal(this == $hijo, estaVivo == true, estaLibre == true)
+        $ceto : CriaturaMarina(nombre == "Ceto", estaVivo == true, estaLibre == true)
+        not Apresa(preso == $apresado)
+        not Libera(preso == $apresado)
+        
+    then
+    	insert(new Apresa($ceto, $apresado));
+end
+        
+// REGLA 3: MINOS ENVIA AL LABERINTO DE CRETA A UN SER QUE TIENE SU ENOJO (PARA PERSONAJES QUE YA TIENEN UBICACION)
+rule "Minos enojado envia a alguien con ubicacion al laberinto"
+    
+    when
+        $minos : Humano(nombre == "Minos", estaVivo == true, estaLibre == true)
+        TieneEnojo($ser : ser, enojado == $minos)
+        $apresado : Mortal(this == $ser, estaVivo == true, estaLibre == true)
+        $laberinto : Lugar(nombre == "Laberinto")
+    	$ubicacionAnterior : EstaEn(ser == $apresado, lugar != $laberinto)
+    	not Libera(preso == $apresado)
+     
+    then
+    	delete($ubicacionAnterior);
+    	insert(new EstaEn($apresado, $laberinto));
+end
+
+// REGLA 4: MINOS ENVIA AL LABERINTO DE CRETA A UN SER QUE TIENE SU ENOJO (PARA PERSONAJES SIN UBICACION INICIAL)
+rule "Minos enojado envia a alguien sin ubicacion al laberinto"
+    
+    when
+    	$minos : Humano(nombre == "Minos", estaVivo == true, estaLibre == true)
+        TieneEnojo($ser : ser, enojado == $minos)
+        $apresado : Mortal(this == $ser, estaVivo == true, estaLibre == true)
+        $laberinto : Lugar(nombre == "Laberinto")
+    	not EstaEn(ser == $apresado)
+    	not Libera(preso == $apresado)
+        
+    then
+        insert(new EstaEn($apresado, $laberinto));
+end
+       
+//REGLA 5: EL MINOTAURO CAPTURA A UN MORTAL EN EL LABERINTO, EN CASO DE QUE NO TENGA EL HILO DE ARIADNA
+// NO SE EXIGE QUE EL PROPIO MINOTAURO ESTE LIBRE PORQUE, DE HECHO, VIVE ENCERRADO EN EL LABERINTO
+rule "Minotauro captura intruso en el laberinto"
+    
+    when
+    	$laberinto : Lugar(nombre == "Laberinto")
+    	$minotauro : Minotauro(estaVivo == true)
+    	EstaEn(ser == $minotauro, lugar == $laberinto)
+    	$intruso : Mortal(estaVivo == true, estaLibre == true)
+    	EstaEn(ser == $intruso, lugar == $laberinto)
+    	not PoseeObjeto(ser == $intruso, objeto.nombre == "Hilo de Ariadna")
+    	not Apresa(preso == $intruso)
+    	not Libera(preso == $intruso)
+        
+    then
+    	insert(new Apresa($minotauro, $intruso));
+end
+        
+//REGLA 6: UN SER APRESADO YA NO ES LIBRE
+rule "Ser apresado ya no es libre"
+    
+    when
+        Apresa($preso : preso)
+        $apresado : Ser(this == $preso, estaLibre == true)
+        not Libera(preso == $apresado)
+    then
+    	modify($apresado) { setEstaLibre(false); } 	
+end
+
+//REGLA 7: LA MUERTE DE UN CAPTOR IMPLICA LA LIBERACION DE SUS PRESOS POR SU ASESINO
+rule "Muerte de un captor libera presos"
+    
+    when
+         Mata($libertador : asesino, $victima : asesinado)
+   		 Mortal(this == $victima, estaVivo == false)
+    	 Apresa(captor == $victima, $preso : preso)
+    	 $apresado : Ser(this == $preso, estaLibre == false)
+    	 not Libera(preso == $apresado)
+        
+    then
+        insert(new Libera($libertador, $preso));
+end
+
+// REGLA 8: TODO SER QUE HAYA SIDO LIBERADO PASA A ESTAR LIBRE
+rule "Todo ser liberado pasa a estar libre"
+    when
+    	Libera($preso : preso)
+    	$liberado : Ser(this == $preso, estaLibre == false)
+    then
+    	modify($liberado) { setEstaLibre(true); } 	
+end
+
+// REGLA 9: TODO SER QUE HAYA SIDO LIBERADO YA NO ESTA APRESADO   
+rule "Todo ser liberado no esta apresado"
+    when
+        Libera($liberado : preso)
+        $captura : Apresa(preso == $liberado)
+    then
+    	delete($captura);
+end
+
+// REGLA 10: UN HEROE CON EL HILO DE ARIADNA RESCATA A UN PRESO DEL MINOTAURO
+// SE REQUIERE QUE EL HEROE HAYA LOCALIZADO AL PRESO, Y QUE TANTO HEROE COMO PRESO ESTEN EN EL LABERINTO DE CRETA
+rule "Heroe rescata a preso en el laberinto"
+    when
+    	$laberinto : Lugar(nombre == "Laberinto")
+    	$heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    	EstaEn(ser == $heroe, lugar == $laberinto)
+    	PoseeObjeto(ser == $heroe, objeto.nombre == "Hilo de Ariadna")
+    	$preso : Ser(this != $heroe, estaLibre == false)
+    	EstaEn(ser == $preso, lugar == $laberinto)
+    	Localiza(buscador == $heroe, localizado == $preso)
+    	$captor : Minotauro(estaVivo == true)
+    	Apresa(captor == $captor, preso == $preso)
+    	not Libera(preso == $preso)
+    	EstaEn(ser == $heroe, $lugar : lugar) // estan en el mismo lugar
+		EstaEn(ser == $preso, lugar == $lugar)
+        
+    then
+    	insert(new Libera($heroe, $preso));
+
+end
+
+// REGLA 11: UN HEROE DISTINTO PUEDE LIBERAR A UN PRESO DE FORMA SIGILOSA
+// SE REQUIERE QUE POSEA UN OBJETO QUE OTORGUE INVISIBILIDAD Y HAYA LOCALIZADO AL PRESO
+rule "Otro heroe invisible rescata a preso"
+    when
+      $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+      PoseeObjeto(ser == $heroe, $objeto : objeto)
+      OtorgaCapacidad(objeto == $objeto, capacidad.nombre == "Invisibilidad")
+      $preso : Ser(this != $heroe, estaLibre == false)
+      Localiza(buscador == $heroe, localizado == $preso)
+      Apresa($captor : captor, preso == $preso)
+      not Mata(asesinado == $captor)
+      not Libera(preso == $preso)
+      
+    then
+    	insert(new Libera($heroe, $preso));
+end
+        
