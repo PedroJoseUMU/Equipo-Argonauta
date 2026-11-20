@@ -1,0 +1,72 @@
+package reglas
+
+//list any import classes here.
+import modelo.*;
+import relaciones.*;
+
+
+rule "Heroe mata a Medusa"
+agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $medusa : Gorgona(nombre == "Medusa", estaVivo == true)
+    Localiza(buscador == $heroe, localizado == $medusa)
+    $inv : Capacidad(nombre == "Invisibilidad")
+    $vue : Capacidad(nombre == "Vuelo")
+    $esp : Capacidad(nombre == "Espejo")
+    $cor : Capacidad(nombre == "Cortar")
+    TieneCapacidad(ser == $heroe, capacidad == $inv)
+    TieneCapacidad(ser == $heroe, capacidad == $vue)
+    TieneCapacidad(ser == $heroe, capacidad == $esp)
+    TieneCapacidad(ser == $heroe, capacidad == $cor)
+    not Mata(asesinado == $medusa)
+then
+    insert(new Mata($heroe, $medusa));
+    System.out.println($heroe + " mata a " + $medusa + " debido a tener Invisibilidad, Vuelo, Espejo y Cortar");
+end
+
+rule "La victima de una muerte deja de estar viva"
+agenda-group "Historias"
+when
+    Mata($v : asesinado)
+    $m : Mortal(this == $v, estaVivo == true)
+then
+    modify($m) { setEstaVivo(false); }
+end
+
+rule "Quien mata se queda con las posesiones de la victima"
+agenda-group "Historias"
+when
+    Mata($a : asesino, $v : asesinado)
+    $p : PoseeObjeto(ser == $v, $o : objeto)
+then
+    delete($p);
+    insert(new PoseeObjeto($a, $o));
+    System.out.println($a + " obtiene " + $o + " debido a matar a " + $v);
+end
+
+rule "Heroe mata a Ceto"
+agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $ceto : CriaturaMarina(nombre == "Ceto", estaVivo == true)
+    $pet : Capacidad(nombre == "Petrificar")
+    TieneCapacidad(ser == $heroe, capacidad == $pet)
+    not Mata(asesinado == $ceto)
+then
+    insert(new Mata($heroe, $ceto));
+    System.out.println($heroe + " mata a " + $ceto + " debido a tener la capacidad Petrificar");
+end
+
+rule "Heroe con la cabeza de Medusa y sin zurron muere"
+agenda-group "Historias"
+when
+    $m : Mortal(estaVivo == true, esHeroe == true)
+    $cabeza : Objeto(nombre == "Cabeza de Medusa")
+    $zurron : Objeto(nombre == "Zurron Magico")
+    PoseeObjeto(ser == $m, objeto == $cabeza)
+    not PoseeObjeto(ser == $m, objeto == $zurron)
+then
+    modify($m) { setEstaVivo(false); }
+    System.out.println($m + " muere debido a portar la cabeza de Medusa sin zurron magico");
+end

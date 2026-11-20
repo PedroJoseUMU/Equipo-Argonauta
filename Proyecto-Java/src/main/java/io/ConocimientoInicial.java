@@ -43,7 +43,8 @@ public class ConocimientoInicial {
 	            Capacidad vuelo         = new Capacidad("Vuelo");
 	            Capacidad espejo        = new Capacidad("Espejo");
 	            Capacidad petrificar    = new Capacidad("Petrificar");
-	            hechos.addAll(Arrays.asList(invisibilidad, vuelo, espejo, petrificar));
+	            Capacidad cortar = new Capacidad("Cortar");
+	            hechos.addAll(Arrays.asList(invisibilidad, vuelo, espejo, petrificar, cortar));
 
 	            Objeto escudoBronce = new Arma("Escudo de Bronce");
 	            Objeto hoz          = new Arma("Hoz de Acero");
@@ -80,6 +81,7 @@ public class ConocimientoInicial {
 	            concede(escudoEspejo, espejo);
 	            concede(espejoMano, espejo);
 	            concede(cabeza, petrificar);
+	            concede(hoz, cortar);
 
 	            hechos.add(new Apresa(poseidon, ceto));
 	            hechos.add(new HijoDe(andromeda, casiopea));
