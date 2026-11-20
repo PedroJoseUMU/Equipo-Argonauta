@@ -2,23 +2,8 @@
 package reglas;
 
 //list any import classes here.
-import modelo.Ser;
-import modelo.Mortal;
-import modelo.Humano;
-import modelo.Dios;
-import modelo.CriaturaMarina;
-import modelo.Minotauro;
-import modelo.Lugar;
-
-import relaciones.Apresa;
-import relaciones.Libera;
-import relaciones.Mata;
-import relaciones.HijoDe;
-import relaciones.TieneEnojo;
-import relaciones.EstaEn;
-import relaciones.Localiza;
-import relaciones.PoseeObjeto;
-import relaciones.OtorgaCapacidad;
+import modelo.*
+import relaciones.*
 
 // REGLAS PARA CAPTURAS Y LIBERACIONES DE SERES
 // Este primer modelo admite solo una captura por personaje y escenario
