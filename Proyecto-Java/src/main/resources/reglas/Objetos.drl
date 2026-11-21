@@ -88,17 +88,3 @@ then
     insert(new PoseeObjeto($heroe, $escudoEspejo));
     escritor.escribirLinea($heroe + " obtiene Escudo-Espejo gracias al favor de Hefesto y al Escudo de Bronce.");
 end
-
-// REGLA 6: EL HEROE OBTIENE LA CABEZA DE MEDUSA TRAS SU MUERTE
-rule "Heroe obtiene Cabeza de Medusa tras matarla"
-    agenda-group "Historias"
-when
-    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
-    $medusa : Gorgona(nombre == "Medusa", estaVivo == false)
-    Mata(asesino == $heroe, asesinado == $medusa)
-    $cabeza : Objeto(nombre == "Cabeza de Medusa")
-    not PoseeObjeto(objeto == $cabeza)
-then
-    insert(new PoseeObjeto($heroe, $cabeza));
-    escritor.escribirLinea($heroe + " obtiene la Cabeza de Medusa tras matarla.");
-end

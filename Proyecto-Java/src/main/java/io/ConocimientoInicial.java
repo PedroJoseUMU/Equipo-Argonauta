@@ -103,6 +103,7 @@ public class ConocimientoInicial {
 	            posee(ninfas, sandalias);
 	            posee(grayas, ojo);
 	            posee(medusa, cabeza);
+	            posee(medusa, cabeza);
 	            posee(minotaruo, cabezaMinotauro);
 	            posee(ceto, cabezaCeto);
 	            posee(ariadna, hiloAriadna);
@@ -111,7 +112,6 @@ public class ConocimientoInicial {
 	            posee(icaro, alasIcaro);
 	            posee(dedalo, cera);
 	            posee(dedalo, plumas);
-	            
 	            
 
 
