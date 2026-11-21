@@ -1,0 +1,25 @@
+//created on: 21 nov. 2026
+package reglas
+
+//list any import classes here.
+import modelo.*;
+import relaciones.*;
+
+
+rule "Perseo localiza a las Grayas"
+
+    when
+        //conditions
+    then
+        //actions
+
+end
+
+rule "Your Second Rule"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+    then
+        //actions
+
+end
