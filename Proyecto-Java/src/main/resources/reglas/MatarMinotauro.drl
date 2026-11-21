@@ -1,0 +1,123 @@
+//created on: 21 nov. 2026
+package reglas
+
+//list any import classes here.
+import modelo.*;
+import relaciones.*;
+import io.Escritor;
+
+global io.Escritor escritor;
+
+rule "Teseo mata al Minotauro"
+    agenda-group "Historias"
+when
+    $heroe : Semidios(esHeroe == true, estaVivo == true, estaLibre == true)
+    $minot : Minotauro(estaVivo == true)
+    $esp : Arma(nombre == "Espada de Teseo")
+    PoseeObjeto(ser == $heroe, objeto == $esp)
+    not Mata(asesinado == $minot)
+then
+    insert(new Mata($heroe, $minot));
+    escritor.escribirLinea($heroe + " mata a " + $minot + " debido a tener la Espada de Teseo");
+end
+
+rule "Heracles mata al Minotauro con sus manos"
+    agenda-group "Historias"
+when
+    $heroe : Semidios(esHeroe == true, estaVivo == true, estaLibre == true, nombre == "Heracles")
+    $minot : Minotauro(estaVivo == true)
+    not Mata(asesinado == $minot)
+then
+    insert(new Mata($heroe, $minot));
+    escritor.escribirLinea($heroe + " mata al Minotauro con sus manos");
+end
+
+rule "Heroe mata al Minotauro con la capacidad Tumba"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $minot : Minotauro(estaVivo == true)
+    TieneCapacidad(ser == $heroe, capacidad == $tumba : Capacidad(nombre == "Tumba"))
+    not Mata(asesinado == $minot)
+then
+    insert(new Mata($heroe, $minot));
+    escritor.escribirLinea($heroe + " mata al Minotauro con la capacidad Tumba");
+end
+
+rule "Minotauro apresa sin Hilo de Ariadna"
+    agenda-group "Historias"
+when
+    $minot : Minotauro()
+    $victima : Ser(estaLibre == true)
+    EstaEn(ser == $victima, $lugar : Lugar())
+    not PoseeObjeto(ser == $victima, objeto == $hilo : Objeto(nombre == "Hilo de Ariadna"))
+    not Apresa(captor == $minot, apresa == $victima)
+then
+    insert(new Apresa($minot, $victima));
+    modify($victima) { setEstaLibre(false); }
+    escritor.escribirLinea($victima + " es apresado por el Minotauro al entrar al laberinto sin el Hilo de Ariadna");
+end
+
+
+rule "Minos envía al laberinto a quien lo enoje"
+    agenda-group "Historias"
+when
+    TieneEnojo(victimario == $victima, enemigo == $minos : DiosMenor(nombre == "Minos"))
+    not Apresa(captor == $minos, apresa == $victima)
+then
+    insert(new Apresa($minos, $victima));
+    modify($victima) { setEstaLibre(false); }
+    escritor.escribirLinea($victima + " es enviado al laberinto por Minos debido a su enojo");
+end
+
+rule "Hilo de Ariadna protege del Minotauro"
+    agenda-group "Historias"
+when
+    $victima : Ser(estaLibre == true, esHeroe == true)
+    PoseeObjeto(ser == $victima, objeto == $hilo : Objeto(nombre == "Hilo de Ariadna"))
+    not EstaEn(ser == $victima, $lugar : Lugar())
+then
+    insert(new EstaEn($victima, $lugar));
+    // No se captura porque tiene el hilo
+    escritor.escribirLinea("El Hilo de Ariadna protege a " + $victima.getNombre() + " del Minotauro");
+end
+
+rule "Matar a Medusa con Cuerno del Minotauro"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $medusa : Gorgona(nombre == "Medusa", estaVivo == true)
+    Localiza(buscador == $heroe, localizado == $medusa)
+    $inv : Capacidad(nombre == "Invisibilidad")
+    $vue : Capacidad(nombre == "Vuelo")
+    $esp : Capacidad(nombre == "Espejo")
+    TieneCapacidad(ser == $heroe, capacidad == $inv)
+    TieneCapacidad(ser == $heroe, capacidad == $vue)
+    TieneCapacidad(ser == $heroe, capacidad == $esp)
+    $cuerno : Arma(nombre == "Cuerno del Minotauro")
+    PoseeObjeto(ser == $heroe, objeto == $cuerno)
+    not Mata(asesinado == $medusa)
+then
+    insert(new Mata($heroe, $medusa));
+    escritor.escribirLinea($heroe + " mata a " + $medusa + " con el Cuerno del Minotauro");
+end
+
+rule "Dédalo construye alas de cera y plumas"
+    agenda-group "Historias"
+when
+    $dedalo : Humano()
+    $icaro : Mortal(nombre == "Ícaro")
+    $cera : Objeto(nombre == "Cera de Abejas")
+    PoseeObjeto(ser == $dedalo, objeto == $cera)
+    $plumas : Objeto(nombre == "Plumas")
+    PoseeObjeto(ser == $dedalo, objeto == $plumas)
+    not OtorgaCapacidad(objeto == $alasI : Objeto(nombre == "Alas de Ícaro"),
+                        capacidad == $capVuelo : Capacidad(nombre == "Vuelo"))
+then
+    insert(new OtorgaCapacidad(new Objeto("Alas de Ícaro"), new Capacidad("Vuelo")));
+    insert(new OtorgaCapacidad(new Objeto("Alas de Dédalo"), new Capacidad("Vuelo")));
+    insert(new PoseeObjeto($icaro, new Objeto("Alas de Ícaro")));
+    insert(new PoseeObjeto($dedalo, new Objeto("Alas de Dédalo")));
+    escritor.escribirLinea("Dédalo construye las alas de " + $icaro.getNombre()
+        + " con cera de abejas y plumas");
+end
