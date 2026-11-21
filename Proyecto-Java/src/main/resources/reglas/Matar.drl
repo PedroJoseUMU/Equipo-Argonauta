@@ -3,6 +3,10 @@ package reglas
 //list any import classes here.
 import modelo.*;
 import relaciones.*;
+import io.Escritor;
+
+//variable global escritor (para escribir en fichero respuesta)
+global io.Escritor escritor;
 
 
 rule "Heroe mata a Medusa"
@@ -22,7 +26,7 @@ when
     not Mata(asesinado == $medusa)
 then
     insert(new Mata($heroe, $medusa));
-    System.out.println($heroe + " mata a " + $medusa + " debido a tener Invisibilidad, Vuelo, Espejo y Cortar");
+    escritor.escribirLinea($heroe + " mata a " + $medusa + " debido a tener Invisibilidad, Vuelo, Espejo y Cortar");
 end
 
 rule "La victima de una muerte deja de estar viva"
@@ -42,7 +46,7 @@ when
 then
     delete($p);
     insert(new PoseeObjeto($a, $o));
-    System.out.println($a + " obtiene " + $o + " debido a matar a " + $v);
+    escritor.escribirLinea($a + " obtiene " + $o + " debido a matar a " + $v);
 end
 
 rule "Heroe mata a Ceto"
@@ -55,7 +59,7 @@ when
     not Mata(asesinado == $ceto)
 then
     insert(new Mata($heroe, $ceto));
-    System.out.println($heroe + " mata a " + $ceto + " debido a tener la capacidad Petrificar");
+    escritor.escribirLinea($heroe + " mata a " + $ceto + " debido a tener la capacidad Petrificar");
 end
 
 rule "Heroe con la cabeza de Medusa y sin zurron muere"
@@ -68,5 +72,5 @@ when
     not PoseeObjeto(ser == $m, objeto == $zurron)
 then
     modify($m) { setEstaVivo(false); }
-    System.out.println($m + " muere debido a portar la cabeza de Medusa sin zurron magico");
+    escritor.escribirLinea($m + " muere debido a portar la cabeza de Medusa sin zurron magico");
 end

@@ -1,0 +1,41 @@
+Perseo presente y vivo y libre
+Andromeda presente y vivo y libre
+Casiopea presente y vivo y libre
+Medusa presente y vivo y libre
+Ceto presente y vivo y preso
+Zeus presente e inmortal
+Poseidon presente e inmortal
+Atenea presente e inmortal
+Hermes presente e inmortal
+Hades presente e inmortal
+Hefesto presente e inmortal
+Grayas presente e inmortal
+Ninfas presente e inmortal
+Atenea posee Escudo de Bronce
+Hermes posee Hoz de Acero
+Hades posee Casco de Hades
+Hefesto posee Brida de Oro
+Ninfas posee Zurron Magico
+Ninfas posee Sandalias Aladas
+Grayas posee Ojo de las Grayas
+Medusa posee Cabeza de Medusa
+Casiopea tiene el enojo de Poseidon
+Perseo tiene el favor de Atenea
+Perseo tiene el favor de Hermes
+Perseo tiene el favor de Hades
+Perseo tiene el favor de Hefesto
+Perseo tiene Capacidades: Ninguna
+Andromeda tiene Capacidades: Ninguna
+Casiopea tiene Capacidades: Ninguna
+Medusa tiene Capacidades: Ninguna
+Ceto tiene Capacidades: Ninguna
+Puede Perseo liberar Andromeda?
+Perseo obtiene Brida de Oro debido a tener el favor de Hefesto.
+Perseo obtiene Casco de Hades debido a tener el favor de Hades.
+Perseo obtiene Hoz de Acero debido a tener el favor de Hermes.
+Perseo obtiene Escudo de Bronce debido a tener el favor de Atenea.
+Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
+Andromeda queda presa debido a estar Ceto libre.
+Perseo obtiene la capacidad Invisibilidad debido a tener Casco de Hades.
+Perseo obtiene la capacidad Cortar debido a tener Hoz de Acero.
+Medusa obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.

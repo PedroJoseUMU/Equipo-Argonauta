@@ -4,6 +4,10 @@ package reglas
 //list any import classes here.
 import modelo.*;
 import relaciones.*;
+import io.Escritor;
+
+//variable global escritor (para escribir en fichero respuesta)
+global io.Escritor escritor;
 
 
 rule "Perseo localiza a las Grayas"

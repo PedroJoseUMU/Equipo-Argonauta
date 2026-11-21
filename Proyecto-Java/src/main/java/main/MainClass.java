@@ -8,6 +8,7 @@ import org.kie.api.runtime.KieSession;
 
 import io.ConocimientoInicial;
 import io.Lector;
+import io.Escritor;
 
 public class MainClass {
 	public static  void main(String[] args) throws Exception {
@@ -21,25 +22,40 @@ public class MainClass {
         
         for (int i = 1; i <= 8; i++) {
             File f = new File(escenarios, "Escenario.F2-" + i + ".txt");
-            if (!f.exists()) {
-            	continue;}
-            System.out.println("Escenario " + i + " - hechos:");
-            KieSession session = kc.newKieSession("ksession-mitos");
+            if (!f.isFile()) {
+            	continue;
+            	}
+            // Por cada escenario se tiene su propio fichero de respuesta
+            File respuesta = new File(soluciones, "Respuesta.F2-" + i + ".txt");
             
-            ConocimientoInicial ci = new ConocimientoInicial();
-            for (Object h : ci.getHechos()) session.insert(h);
+            try (Escritor escritor = new Escritor(respuesta)) {
+            	KieSession session = kc.newKieSession("ksession-mitos");
+            	try {
+            		// Para que se pueda utilizar el escritor en los ficheros de reglas
+            		session.setGlobal("escritor", escritor);
+            		
+            		ConocimientoInicial ci = new ConocimientoInicial();
+                    for (Object h : ci.getHechos()) session.insert(h);
 
-            Lector lector = new Lector(ci.getSeres(), ci.getObjetos());
-            for (Object h : lector.leer(f.getPath())) session.insert(h);
+                    Lector lector = new Lector(ci.getSeres(), ci.getObjetos());
+                    for (Object h : lector.leer(f.getPath())) session.insert(h);
 
-            session.getAgenda().getAgendaGroup("Condiciones iniciales").setFocus();
-            session.fireAllRules();
-            session.getAgenda().getAgendaGroup("Informacion Inicial").setFocus();
-            session.fireAllRules();
-            session.getAgenda().getAgendaGroup("Historias").setFocus();
-            session.fireAllRules();
-
-            session.dispose();
+                    session.getAgenda().getAgendaGroup("Condiciones iniciales").setFocus();
+                    session.fireAllRules();
+                    
+                    session.getAgenda().getAgendaGroup("Informacion Inicial").setFocus();
+                    session.fireAllRules();
+                    
+                    session.getAgenda().getAgendaGroup("Historias").setFocus();
+                    session.fireAllRules();
+                    
+            	}
+            	finally {
+            		session.dispose();
+            	}
+               
+            }
+            
         }
         
         

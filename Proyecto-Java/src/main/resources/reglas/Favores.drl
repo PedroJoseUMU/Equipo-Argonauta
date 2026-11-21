@@ -2,6 +2,10 @@ package reglas;
 
 import modelo.*;
 import relaciones.*;
+import io.Escritor;
+
+//variable global escritor (para escribir en fichero respuesta)
+global io.Escritor escritor;
 
 rule "Dios transfiere objeto a quien tenga su favor"
     agenda-group "Historias"
@@ -11,6 +15,6 @@ when
     not  PoseeObjeto(ser == $m, objeto == $o)
 then
     insert(new PoseeObjeto($m, $o));
-    System.out.println($m.getNombre() + " obtiene " + $o.getNombre() + " debido a tener el favor de " + $d.getNombre()+".");
+    escritor.escribirLinea($m.getNombre() + " obtiene " + $o.getNombre() + " debido a tener el favor de " + $d.getNombre()+".");
     delete($dObj);
 end

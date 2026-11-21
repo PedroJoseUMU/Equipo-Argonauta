@@ -4,6 +4,10 @@ package reglas;
 //list any import classes here.
 import modelo.*
 import relaciones.*
+import io.Escritor;
+
+//variable global escritor (para escribir en fichero respuesta)
+global io.Escritor escritor;
 
 // REGLAS PARA CAPTURAS Y LIBERACIONES DE SERES
 // Este primer modelo admite solo una captura por personaje y escenario
@@ -21,7 +25,7 @@ agenda-group "Historias"
         not Libera(preso == $ceto)
         
     then
-        System.out.println($ceto+ " queda libre debido al enojo de "+ $poseidon+ " hacia " + $progenitor+".");
+        escritor.escribirLinea($ceto+ " queda libre debido al enojo de "+ $poseidon+ " hacia " + $progenitor+".");
         insert (new Libera($poseidon, $ceto));
 
 end
@@ -41,7 +45,7 @@ agenda-group "Historias"
         not Libera(preso == $apresado)
         
     then
-        System.out.println($apresado+ " queda presa debido a estar "+ $ceto+ " libre.");
+        escritor.escribirLinea($apresado+ " queda presa debido a estar "+ $ceto+ " libre.");
     	insert(new Apresa($ceto, $apresado));
 end
         
@@ -59,7 +63,7 @@ agenda-group "Historias"
     	not Libera(preso == $apresado)
      
     then
-    	System.out.println($apresado + " es enviado al "+ $laberinto +" debido al enojo de "+$minos+ "." );
+    	escritor.escribirLinea($apresado + " es enviado al "+ $laberinto +" debido al enojo de "+$minos+ "." );
     	delete($ubicacionAnterior);
     	insert(new EstaEn($apresado, $laberinto));
 end
@@ -78,7 +82,7 @@ agenda-group "Historias"
     	not Libera(preso == $apresado)
         
     then
-    	System.out.println($apresado + " es enviado al "+ $laberinto +" debido al enojo de "+$minos+ "." );
+    	escritor.escribirLinea($apresado + " es enviado al "+ $laberinto +" debido al enojo de "+$minos+ "." );
         insert(new EstaEn($apresado, $laberinto));
 end
        
@@ -98,7 +102,7 @@ agenda-group "Historias"
     	not Libera(preso == $intruso)
         
     then
-    	System.out.println($intruso + " es apresado en el "+ $laberinto +" por "+$minotauro+ "." );
+    	escritor.escribirLinea($intruso + " es apresado en el "+ $laberinto +" por "+$minotauro+ "." );
     	insert(new Apresa($minotauro, $intruso));
 end
         
@@ -126,7 +130,7 @@ agenda-group "Historias"
     	 not Libera(preso == $apresado)
         
     then
-    	System.out.println($apresado + " es liberado debido a la muerte de "+$victima+ "." );
+    	escritor.escribirLinea($apresado + " es liberado debido a la muerte de "+$victima+ "." );
         insert(new Libera($libertador, $preso));
 end
 
@@ -172,7 +176,7 @@ agenda-group "Historias"
 		EstaEn(ser == $preso, lugar == $lugar)
         
     then
-    	System.out.println($preso + " es liberado por "+ $heroe +" en el "+$laberinto+ "." );
+    	escritor.escribirLinea($preso + " es liberado por "+ $heroe +" en el "+$laberinto+ "." );
     	insert(new Libera($heroe, $preso));
 
 end
@@ -193,7 +197,7 @@ agenda-group "Historias"
       not Libera(preso == $preso)
       
     then
-        System.out.println($preso + " es liberado por "+ $heroe + " de forma sigilosa." );
+        escritor.escribirLinea($preso + " es liberado por "+ $heroe + " de forma sigilosa." );
     	insert(new Libera($heroe, $preso));
 end
         

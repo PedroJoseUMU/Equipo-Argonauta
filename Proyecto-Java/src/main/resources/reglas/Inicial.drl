@@ -3,13 +3,17 @@ package reglas
 import modelo.*;
 import relaciones.*;
 import io.Pregunta;
+import io.Escritor;
+
+//variable global escritor (para escribir en fichero respuesta)
+global io.Escritor escritor;
 
 rule "Mostrar mortales vivos y libres"
 agenda-group "Informacion Inicial"
 when
     $m : Mortal(estaVivo == true, estaLibre == true)
 then
-    System.out.println($m + " presente y vivo y libre");
+    escritor.escribirLinea($m + " presente y vivo y libre");
 end
 
 rule "Mostrar mortales vivos y presos"
@@ -17,7 +21,7 @@ agenda-group "Informacion Inicial"
 when
     $m : Mortal(estaVivo == true, estaLibre == false)
 then
-    System.out.println($m + " presente y vivo y preso");
+    escritor.escribirLinea($m + " presente y vivo y preso");
 end
 
 rule "Mostrar inmortales"
@@ -25,7 +29,7 @@ agenda-group "Informacion Inicial"
 when
     $i : Inmortal()
 then
-    System.out.println($i + " presente e inmortal");
+    escritor.escribirLinea($i + " presente e inmortal");
 end
 
 rule "Mostrar posesiones"
@@ -33,7 +37,7 @@ agenda-group "Informacion Inicial"
 when
     $p : PoseeObjeto()
 then
-    System.out.println($p);
+    escritor.escribirLinea($p);
 end
 
 rule "Mostrar enojos"
@@ -41,7 +45,7 @@ agenda-group "Informacion Inicial"
 when
     $e : TieneEnojo()
 then
-    System.out.println($e);
+    escritor.escribirLinea($e);
 end
 
 rule "Mostrar favores"
@@ -49,7 +53,7 @@ agenda-group "Informacion Inicial"
 when
     $f : TieneFavor()
 then
-    System.out.println($f);
+    escritor.escribirLinea($f);
 end
 
 rule "Mostrar capacidades"
@@ -57,7 +61,7 @@ agenda-group "Informacion Inicial"
 when
     TieneCapacidad($s : ser, $c : capacidad)
 then
-    System.out.println($s + " tiene la capacidad " + $c);
+    escritor.escribirLinea($s + " tiene la capacidad " + $c);
 end
 
 rule "Mostrar mortales sin capacidades"
@@ -66,7 +70,7 @@ when
     $m : Mortal()
     not TieneCapacidad(ser == $m)
 then
-    System.out.println($m + " tiene Capacidades: Ninguna");
+    escritor.escribirLinea($m + " tiene Capacidades: Ninguna");
 end
 
 
@@ -75,5 +79,5 @@ agenda-group "Informacion Inicial"
 when
     $q : Pregunta()
 then
-    System.out.println($q);
+    escritor.escribirLinea($q);
 end

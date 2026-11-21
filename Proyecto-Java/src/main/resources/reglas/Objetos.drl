@@ -2,6 +2,10 @@ package reglas;
 
 import modelo.*;
 import relaciones.*;
+import io.Escritor;
+
+//variable global escritor (para escribir en fichero respuesta)
+global io.Escritor escritor;
 
 rule "Objeto Magico otorga capacidad a su poseedor"
     agenda-group "Historias"
@@ -12,5 +16,5 @@ when
     not  TieneCapacidad(ser == $m, capacidad == $oc.capacidad)
 then
     insert(new TieneCapacidad($m, $oc.getCapacidad()));
-    System.out.println($m.getNombre()+ " obtiene la capacidad " + $oc.getCapacidad()+ " debido a tener " + $o.getNombre()+".");
+    escritor.escribirLinea($m.getNombre()+ " obtiene la capacidad " + $oc.getCapacidad()+ " debido a tener " + $o.getNombre()+".");
 end
