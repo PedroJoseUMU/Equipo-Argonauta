@@ -1,29 +1,58 @@
-//created on: 21 nov. 2026
-package reglas
 
-//list any import classes here.
+package reglas;
+
 import modelo.*;
 import relaciones.*;
-import io.Escritor;
 
-//variable global escritor (para escribir en fichero respuesta)
 global io.Escritor escritor;
 
-
-rule "Perseo localiza a las Grayas"
-
-    when
-        //conditions
-    then
-        //actions
-
+// REGLA 1: UN HEROE LOCALIZA A LAS GRAYAS
+rule "Heroe localiza a las Grayas"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $atenea : Dios(nombre == "Atenea")
+    $hermes : Dios(nombre == "Hermes")
+    TieneFavor(mortal == $heroe, dios == $atenea)
+    TieneFavor(mortal == $heroe, dios == $hermes)
+    $grayas : Graya(nombre == "Grayas")
+    not Localiza(buscador == $heroe, localizado == $grayas)
+then
+    insert(new Localiza($heroe, $grayas));
+    escritor.escribirLinea($heroe + " localiza a las Grayas gracias a Atenea y Hermes.");
 end
 
-rule "Your Second Rule"
-    //include attributes such as "salience" here...
-    when
-        //conditions
-    then
-        //actions
-
+// REGLA 2: LAS GRAYAS REVELAN AL HEROE DONDE ESTAN LAS NINFAS
+rule "Heroe localiza a las Ninfas al devolver el ojo"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $grayas : Graya(nombre == "Grayas")
+    Localiza(buscador == $heroe, localizado == $grayas)
+    $ojo : Objeto(nombre == "Ojo de las Grayas")
+    $posesionOjo : PoseeObjeto(ser == $heroe, objeto == $ojo)
+    $ninfas : Ninfa(nombre == "Ninfas")
+    not Localiza(buscador == $heroe, localizado == $ninfas)
+then
+    delete($posesionOjo);
+    insert(new PoseeObjeto($grayas, $ojo));
+    insert(new Localiza($heroe, $ninfas));
+    escritor.escribirLinea($heroe + " devuelve el Ojo de las Grayas y localiza a las Ninfas.");
 end
+
+// REGLA 3: UN HEROE LOCALIZA A MEDUSA
+rule "Heroe localiza a Medusa"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $ninfas : Ninfa(nombre == "Ninfas")
+    Localiza(buscador == $heroe, localizado == $ninfas)
+    $vuelo : Capacidad(nombre == "Vuelo")
+    TieneCapacidad(ser == $heroe, capacidad == $vuelo)
+    $medusa : Gorgona(nombre == "Medusa", estaVivo == true)
+    not Localiza(buscador == $heroe, localizado == $medusa)
+then
+    insert(new Localiza($heroe, $medusa));
+    escritor.escribirLinea($heroe + " localiza a Medusa gracias a las Ninfas y a su capacidad de vuelo.");
+end
+

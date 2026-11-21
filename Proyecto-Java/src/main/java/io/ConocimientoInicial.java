@@ -72,7 +72,6 @@ public class ConocimientoInicial {
 	            posee(ninfas, zurron);
 	            posee(ninfas, sandalias);
 	            posee(grayas, ojo);
-	            posee(medusa, cabeza);
 
 	            concede(casco, invisibilidad);
 	            concede(anillo, invisibilidad);

@@ -1,0 +1,31 @@
+//created on: 21 nov. 2026
+package reglas
+
+//list any import classes here.
+import io.Pregunta;
+import modelo.*;
+import relaciones.*;
+
+global io.Escritor escritor;
+
+// REGLA 1: MISION LOGRADA
+rule "Respuesta positiva a mision liberar"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "liberar", $heroe : sujeto, $objetivo : objetivo)
+    $preso : Ser(nombre == $objetivo)
+    Libera(liberador == $heroe, preso == $preso)
+then
+    escritor.escribirLinea("Si, " + $heroe + " puede liberar a " + $preso + ".");
+end
+
+// REGLA 2: MISION FALLIDA
+rule "Respuesta negativa a mision liberar"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "liberar", $heroe : sujeto, $objetivo : objetivo)
+    $preso : Ser(nombre == $objetivo)
+    not Libera(liberador == $heroe, preso == $preso)
+then
+    escritor.escribirLinea("No, " + $heroe + " no ha podido liberar a " + $preso + ".");
+end
