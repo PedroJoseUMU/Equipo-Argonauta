@@ -10,11 +10,11 @@ global io.Escritor escritor;
 rule "Dios transfiere objeto a quien tenga su favor"
     agenda-group "Historias"
 when
-    $f  : TieneFavor($m : mortal, $d : Dios)
-    $dObj : PoseeObjeto(ser == $d, $o : objeto)
-    not  PoseeObjeto(ser == $m, objeto == $o)
+    TieneFavor($m : mortal, $d : dios)
+    $posesion : PoseeObjeto(ser == $d, $o : objeto)
+    not PoseeObjeto(ser == $m, objeto == $o)
 then
+	delete($posesion);
     insert(new PoseeObjeto($m, $o));
-    escritor.escribirLinea($m.getNombre() + " obtiene " + $o.getNombre() + " debido a tener el favor de " + $d.getNombre()+".");
-    delete($dObj);
+    escritor.escribirLinea($m.getNombre() + " obtiene " + $o.getNombre() + " debido a tener el favor de " + $d.getNombre()+ ".");
 end

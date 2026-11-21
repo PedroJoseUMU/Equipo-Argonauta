@@ -1,20 +1,104 @@
+
 package reglas;
 
 import modelo.*;
 import relaciones.*;
-import io.Escritor;
 
-//variable global escritor (para escribir en fichero respuesta)
 global io.Escritor escritor;
 
+// REGLA 1: UN OBJETO CONCEDE UNA CAPACIDAD
 rule "Objeto Magico otorga capacidad a su poseedor"
     agenda-group "Historias"
 when
     $m : Mortal()
-    $po  : PoseeObjeto(ser == $m, $o : objeto)
-    $oc  : OtorgaCapacidad(objeto == $o)
-    not  TieneCapacidad(ser == $m, capacidad == $oc.capacidad)
+    PoseeObjeto(ser == $m, $o : objeto)
+    OtorgaCapacidad(objeto == $o, $c : capacidad)
+    not TieneCapacidad(ser == $m, capacidad == $c)
 then
-    insert(new TieneCapacidad($m, $oc.getCapacidad()));
-    escritor.escribirLinea($m.getNombre()+ " obtiene la capacidad " + $oc.getCapacidad()+ " debido a tener " + $o.getNombre()+".");
+    insert(new TieneCapacidad($m, $c));
+    escritor.escribirLinea($m + " obtiene la capacidad " + $c + " debido a tener " + $o + ".");
+end
+
+// REGLA 2: UN HEROE CONSIGUE EL OJO DE LAS GRAYAS
+rule "Heroe consigue el Ojo de las Grayas"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true,esHeroe == true)
+    $grayas : Graya(nombre == "Grayas")
+    Localiza(buscador == $heroe, localizado == $grayas)
+    $invisibilidad : Capacidad(nombre == "Invisibilidad")
+    TieneCapacidad(ser == $heroe, capacidad == $invisibilidad)
+    $ojo : Objeto(nombre == "Ojo de las Grayas")
+    $posesionGrayas : PoseeObjeto(ser == $grayas, objeto == $ojo)
+    $ninfas : Ninfa(nombre == "Ninfas")
+    not Localiza(buscador == $heroe, localizado == $ninfas)
+    not PoseeObjeto(ser == $heroe, objeto == $ojo)
+then
+    delete($posesionGrayas);
+    insert(new PoseeObjeto($heroe, $ojo));
+    escritor.escribirLinea($heroe + " consigue el Ojo de las Grayas gracias a su invisibilidad.");
+end
+
+// REGLA 3: LAS NINFAS ENTREGAN EL ZURRON MAGICO AL HEROE
+rule "Ninfas entregan el Zurron Magico"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true,esHeroe == true)
+    $ninfas : Ninfa(nombre == "Ninfas")
+    Localiza(buscador == $heroe, localizado == $ninfas)
+    $zurron : Objeto(nombre == "Zurron Magico")
+    $posesionNinfas : PoseeObjeto(ser == $ninfas, objeto == $zurron)
+    not PoseeObjeto(ser == $heroe, objeto == $zurron)
+then
+    delete($posesionNinfas);
+    insert(new PoseeObjeto($heroe, $zurron));
+    escritor.escribirLinea($heroe + " obtiene el Zurron Magico de las Ninfas.");
+end
+
+// REGLA 4: LAS NINFAS ENTREGAN LAS SANDALIAS ALADAS AL HEROE
+rule "Ninfas entregan las Sandalias Aladas"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true,esHeroe == true)
+    $ninfas : Ninfa(nombre == "Ninfas")
+    Localiza(buscador == $heroe, localizado == $ninfas)
+    $sandalias : Objeto(nombre == "Sandalias Aladas")
+    $posesionNinfas : PoseeObjeto(ser == $ninfas,objeto == $sandalias)
+    not PoseeObjeto(ser == $heroe, objeto == $sandalias)
+then
+    delete($posesionNinfas);
+    insert(new PoseeObjeto($heroe, $sandalias));
+
+    escritor.escribirLinea($heroe + " obtiene las Sandalias Aladas de las Ninfas.");
+end
+
+// REGLA 5: HEFESTO TRANSFORMA EL ESCUDO EN UN ESPEJO
+rule "Hefesto transforma Escudo de Bronce en Escudo-Espejo"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true,esHeroe == true)
+    $hefesto : Dios(nombre == "Hefesto")
+    TieneFavor(mortal == $heroe, dios == $hefesto)
+    $escudoBronce : Arma(nombre == "Escudo de Bronce")
+    $posesionBronce : PoseeObjeto(ser == $heroe, objeto == $escudoBronce)
+    $escudoEspejo : Arma(nombre == "Escudo-Espejo")
+    not PoseeObjeto(ser == $heroe, objeto == $escudoEspejo)
+then
+    delete($posesionBronce);
+    insert(new PoseeObjeto($heroe, $escudoEspejo));
+    escritor.escribirLinea($heroe + " obtiene Escudo-Espejo gracias al favor de Hefesto y al Escudo de Bronce.");
+end
+
+// REGLA 6: EL HEROE OBTIENE LA CABEZA DE MEDUSA TRAS SU MUERTE
+rule "Heroe obtiene Cabeza de Medusa tras matarla"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $medusa : Gorgona(nombre == "Medusa", estaVivo == false)
+    Mata(asesino == $heroe, asesinado == $medusa)
+    $cabeza : Objeto(nombre == "Cabeza de Medusa")
+    not PoseeObjeto(objeto == $cabeza)
+then
+    insert(new PoseeObjeto($heroe, $cabeza));
+    escritor.escribirLinea($heroe + " obtiene la Cabeza de Medusa tras matarla.");
 end

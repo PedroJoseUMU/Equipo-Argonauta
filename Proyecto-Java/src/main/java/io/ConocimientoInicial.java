@@ -114,6 +114,7 @@ public class ConocimientoInicial {
 	            
 	            
 
+
 	            concede(casco, invisibilidad);
 	            concede(anillo, invisibilidad);
 	            concede(sandalias, vuelo);

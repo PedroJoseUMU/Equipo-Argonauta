@@ -49,6 +49,10 @@ public class MainClass {
                     session.getAgenda().getAgendaGroup("Historias").setFocus();
                     session.fireAllRules();
                     
+                    // Comprueba el resultado cuando termina la historia.
+                    session.getAgenda().getAgendaGroup("Resultados").setFocus();
+                    session.fireAllRules();
+                    
             	}
             	finally {
             		session.dispose();
