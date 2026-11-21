@@ -1,0 +1,5 @@
+Puede Teseo matar a Minotauro?
+Condiciones:
+Teseo tiene Hilo de Ariadna
+Ariadna no tiene Hilo de Ariadna
+Teseo tiene el enojo de Minos
