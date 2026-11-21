@@ -27,15 +27,32 @@ public class Lector {
     }
 
     private Pregunta pregunta(String l) {
-        String[] p = l.replace("Puede ", "").replace("?", "").split(" ", 3);
+    	String[] p = l.replace("Puede ", "").replace("?", "").split(" ", 3);
         String accion = p[1].toLowerCase();
-        String objetivo = p[2];
-        if (objetivo.startsWith("a ")) objetivo = objetivo.substring(2);
-        if (accion.equals("tener")) {
+        String objetivo = p[2].trim();
+
+        if (objetivo.startsWith("a ")) objetivo = objetivo.substring(2).trim();
+
+        // Se normalizan las distintas formas de preguntar por capacidades
+        if (objetivo.startsWith("la capacidad de ")) {
             accion = "capacidad";
-            objetivo = objetivo.replace("la capacidad de ", "");
+            objetivo = objetivo.substring("la capacidad de ".length()).trim();
+        } else if (accion.equals("tener") || accion.equals("conseguir")) {
+            accion = "obtener";
+        } else if (accion.equals("capturar")) {
+            accion = "apresar";
         }
-        return new Pregunta(accion, ser(p[0]), objetivo.trim());
+
+        // Se permiten articulos delante de los nombres de objetos
+        if (accion.equals("obtener")) {
+            for (String articulo : new String[] { "el ", "la ", "los ", "las ", "un ", "una " }) {
+                if (objetivo.startsWith(articulo)) {
+                    objetivo = objetivo.substring(articulo.length()).trim();
+                    break;
+                }
+            }
+        }
+        return new Pregunta(accion, ser(p[0]), objetivo);
     }
 
     private Object condicion(String l) {

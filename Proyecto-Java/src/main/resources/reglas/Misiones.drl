@@ -51,3 +51,70 @@ when
 then
 	escritor.escribirResultado("No, " + $heroe + " no ha podido matar a " + $asesinado + ".");
 end
+
+
+ // REGLA 5: MISION DE APRESAR LOGRADA
+rule "Respuesta positiva a mision apresar"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "apresar", $captor : sujeto, $objetivo : objetivo)
+    $preso : Ser(nombre == $objetivo)
+    Apresa(captor == $captor, preso == $preso)
+then
+    escritor.escribirResultado("Si, " + $captor + " tiene apresado a " + $preso + ".");
+end
+
+// REGLA 6: MISION DE APRESAR FALLIDA
+rule "Respuesta negativa a mision apresar"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "apresar", $captor : sujeto, $objetivo : objetivo)
+    $preso : Ser(nombre == $objetivo)
+    not Apresa(captor == $captor, preso == $preso)
+then
+    escritor.escribirResultado("No, " + $captor + " no tiene apresado a " + $preso + ".");
+end
+
+// REGLA 7: MISION DE OBTENER OBJETO LOGRADA
+rule "Respuesta positiva a mision obtener objeto"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "obtener", $personaje : sujeto, $objetivo : objetivo)
+    $objeto : Objeto(nombre == $objetivo)
+    PoseeObjeto(ser == $personaje, objeto == $objeto)
+then
+    escritor.escribirResultado("Si, " + $personaje + " ha conseguido " + $objeto + ".");
+end
+
+// REGLA 8: MISION DE OBTENER OBJETO FALLIDA
+rule "Respuesta negativa a mision obtener objeto"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "obtener", $personaje : sujeto, $objetivo : objetivo)
+    $objeto : Objeto(nombre == $objetivo)
+    not PoseeObjeto(ser == $personaje, objeto == $objeto)
+then
+    escritor.escribirResultado("No, " + $personaje + " no ha conseguido " + $objeto + ".");
+end
+
+// REGLA 9: MISION DE CONSEGUIR CAPACIDAD LOGRADA
+rule "Respuesta positiva a mision conseguir capacidad"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "capacidad", $personaje : sujeto, $objetivo : objetivo)
+    $capacidad : Capacidad(nombre == $objetivo)
+    TieneCapacidad(ser == $personaje, capacidad == $capacidad)
+then
+    escritor.escribirResultado("Si, " + $personaje + " tiene la capacidad " + $capacidad + ".");
+end
+
+// REGLA 10: MISION DE CONSEGUIR CAPACIDAD FALLIDA
+rule "Respuesta negativa a mision conseguir capacidad"
+    agenda-group "Resultados"
+when
+    Pregunta(accion == "capacidad", $personaje : sujeto, $objetivo : objetivo)
+    $capacidad : Capacidad(nombre == $objetivo)
+    not TieneCapacidad(ser == $personaje, capacidad == $capacidad)
+then
+    escritor.escribirResultado("No, " + $personaje + " no tiene la capacidad " + $capacidad + ".");
+end

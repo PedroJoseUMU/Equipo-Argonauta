@@ -1,6 +1,8 @@
 package main;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -27,6 +29,13 @@ public class MainClass {
             	}
             // Por cada escenario se tiene su propio fichero de respuesta
             File respuesta = new File(soluciones, "Respuesta.F2-" + i + ".txt");
+            
+            // Se muestra el escenario completo antes de procesarlo
+            System.out.println("\n========== ESCENARIO F2-" + i + " ==========\n");
+            for (String linea : Files.readAllLines(f.toPath(), StandardCharsets.UTF_8)) {
+                System.out.println(linea);
+            }
+            System.out.println("\n========== FIN DESCRIPCION ESCENARIO ==========\n");
             
             try (Escritor escritor = new Escritor(respuesta)) {
             	KieSession session = kc.newKieSession("ksession-mitos");
@@ -59,6 +68,13 @@ public class MainClass {
             	}
                
             }
+            
+            // El fichero ya esta cerrado. Se imprime la resputa tal y como se guardo
+            System.out.println("========== RESPUESTA F2-" + i + " ==========\n");
+            for (String linea : Files.readAllLines(respuesta.toPath(), StandardCharsets.UTF_8)) {
+                System.out.println(linea);
+            }
+            System.out.println("\n========== FIN ESCENARIO F2-" + i + " ==========\n");
             
         }
         

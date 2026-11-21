@@ -28,7 +28,6 @@ Ninfas posee Zurron Magico
 Ninfas posee Sandalias Aladas
 Grayas posee Ojo de las Grayas
 Medusa posee Cabeza de Medusa
-Medusa posee Cabeza de Medusa
 Minotauro posee Cabeza del Minotauro
 Ceto posee Cabeza de Ceto
 Teseo posee Espada de Teseo
@@ -61,32 +60,17 @@ Perseo obtiene Brida de Oro debido a tener el favor de Hefesto.
 Perseo obtiene Casco de Hades debido a tener el favor de Hades.
 Perseo obtiene Hoz de Acero debido a tener el favor de Hermes.
 Perseo obtiene Escudo de Bronce debido a tener el favor de Atenea.
-Minos se enoja con Andromeda debido a su enojo con Casiopea.
-Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
-Andromeda es enviado al modelo.Lugar@5396f859 debido al enojo de Minos.
-Teseo es enviado al modelo.Lugar@5396f859 debido al enojo de Minos.
-Casiopea es enviado al modelo.Lugar@5396f859 debido al enojo de Minos.
-Andromeda es apresado en el modelo.Lugar@5396f859 por Minotauro.
-Casiopea es apresado en el modelo.Lugar@5396f859 por Minotauro.
-Minotauro es apresado en el modelo.Lugar@5396f859 por Minotauro.
 Perseo localiza a las Grayas gracias a Atenea y Hermes.
+Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
+Teseo es enviado al Laberinto debido al enojo de Minos.
+Casiopea es enviado al Laberinto debido al enojo de Minos.
+Casiopea es apresado en el Laberinto por Minotauro.
+Andromeda queda presa debido a estar Ceto libre.
 Perseo obtiene la capacidad Invisibilidad debido a tener Casco de Hades.
 Perseo obtiene la capacidad Cortar debido a tener Hoz de Acero.
 Medusa obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
 Teseo obtiene la capacidad Cortar debido a tener Espada de Teseo.
-Teseo mata a Minotauro debido a tener la capacidad Cortar.
-Minos se enoja con Dedalo debido a la muerte de Minotauro.
-Minos se enoja con Icaro debido a su enojo con Dedalo.
-Icaro es enviado al modelo.Lugar@5396f859 debido al enojo de Minos.
-Dedalo es enviado al modelo.Lugar@5396f859 debido al enojo de Minos.
-Dedalo construye las alas conCera de AbejasyPlumas.
-Andromeda es liberado debido a la muerte de Minotauro.
-Casiopea es liberado debido a la muerte de Minotauro.
-Minotauro es liberado debido a la muerte de Minotauro.
-Teseo obtiene Cabeza del Minotauro debido a matar a Minotauro
-Teseo obtiene Cuerno del Minotauro debido a matar a Minotauro
-Icaro obtiene la capacidad Vuelo debido a tener Alas de Icaro.
-Dedalo obtiene la capacidad Vuelo debido a tener Alas de Dedalo.
+Minotauro obtiene la capacidad Cortar debido a tener Cuerno del Minotauro.
 Perseo consigue el Ojo de las Grayas gracias a su invisibilidad.
 Perseo devuelve el Ojo de las Grayas y localiza a las Ninfas.
 Perseo obtiene el Zurron Magico de las Ninfas.
@@ -97,7 +81,19 @@ Perseo obtiene Escudo-Espejo gracias al favor de Hefesto y al Escudo de Bronce.
 Perseo obtiene la capacidad Espejo debido a tener Escudo-Espejo.
 Perseo mata a Medusa debido a tener Invisibilidad, Vuelo, Espejo y Cortar
 Perseo obtiene Cabeza de Medusa debido a matar a Medusa
-Perseo obtiene Cabeza de Medusa debido a matar a Medusa
 Perseo obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
 Perseo mata a Ceto debido a tener la capacidad Petrificar
+Andromeda es liberado debido a la muerte de Ceto.
 Perseo obtiene Cabeza de Ceto debido a matar a Ceto
+Teseo mata a Minotauro debido a tener la capacidad Cortar.
+Casiopea es liberado debido a la muerte de Minotauro.
+Teseo obtiene Cabeza del Minotauro debido a matar a Minotauro
+Teseo obtiene Cuerno del Minotauro debido a matar a Minotauro
+Minos se enoja con Dedalo debido a la muerte de Minotauro.
+Dedalo es enviado al Laberinto debido al enojo de Minos.
+Minos se enoja con Andromeda debido a su enojo con Casiopea.
+Minos se enoja con Icaro debido a su enojo con Dedalo.
+Icaro es enviado al Laberinto debido al enojo de Minos.
+Dedalo construye las alas conCera de AbejasyPlumas.
+Icaro obtiene la capacidad Vuelo debido a tener Alas de Icaro.
+Dedalo obtiene la capacidad Vuelo debido a tener Alas de Dedalo.

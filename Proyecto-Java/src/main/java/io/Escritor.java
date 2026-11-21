@@ -29,13 +29,11 @@ public class Escritor implements Closeable {
     public void escribirLinea(Object mensaje) {
     	String texto = String.valueOf(mensaje);
         historia.add(texto);
-        System.out.println(texto);
     }
     
     public void escribirResultado(Object mensaje) {
         // Misiones.drl establece cual es la conclusion al terminar las historias
         resultado = String.valueOf(mensaje);
-        System.out.println(resultado);
     }
 
     @Override

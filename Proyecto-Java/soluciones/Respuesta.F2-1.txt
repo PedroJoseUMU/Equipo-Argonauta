@@ -28,7 +28,6 @@ Ninfas posee Zurron Magico
 Ninfas posee Sandalias Aladas
 Grayas posee Ojo de las Grayas
 Medusa posee Cabeza de Medusa
-Medusa posee Cabeza de Medusa
 Minotauro posee Cabeza del Minotauro
 Ceto posee Cabeza de Ceto
 Ariadna posee Hilo de Ariadna
@@ -59,10 +58,9 @@ Perseo obtiene Brida de Oro debido a tener el favor de Hefesto.
 Perseo obtiene Casco de Hades debido a tener el favor de Hades.
 Perseo obtiene Hoz de Acero debido a tener el favor de Hermes.
 Perseo obtiene Escudo de Bronce debido a tener el favor de Atenea.
-Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
-Minotauro es apresado en el modelo.Lugar@5396f859 por Minotauro.
-Andromeda queda presa debido a estar Ceto libre.
 Perseo localiza a las Grayas gracias a Atenea y Hermes.
+Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
+Andromeda queda presa debido a estar Ceto libre.
 Perseo obtiene la capacidad Invisibilidad debido a tener Casco de Hades.
 Perseo obtiene la capacidad Cortar debido a tener Hoz de Acero.
 Medusa obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
@@ -77,7 +75,6 @@ Perseo localiza a Medusa gracias a las Ninfas y a su capacidad de vuelo.
 Perseo obtiene Escudo-Espejo gracias al favor de Hefesto y al Escudo de Bronce.
 Perseo obtiene la capacidad Espejo debido a tener Escudo-Espejo.
 Perseo mata a Medusa debido a tener Invisibilidad, Vuelo, Espejo y Cortar
-Perseo obtiene Cabeza de Medusa debido a matar a Medusa
 Perseo obtiene Cabeza de Medusa debido a matar a Medusa
 Perseo obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
 Perseo mata a Ceto debido a tener la capacidad Petrificar
