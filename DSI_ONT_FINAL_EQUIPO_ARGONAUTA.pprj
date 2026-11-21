@@ -1,4 +1,4 @@
-; Sat Nov 14 19:46:17 CET 2026
+; Sat Nov 21 23:06:26 CET 2026
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10]
-		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class11]
-		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class12]))
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10069]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10070]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10071]))
 
 ([CLSES_TAB] of  Widget
 
@@ -37,36 +37,36 @@
 
 	(name ":CREATOR"))
 
-([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10] of  String
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10069] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class11] of  String
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10070] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class12] of  String
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10071] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class13] of  Map_Entry
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10072] of  Map_Entry
 
 	(key "suppress_instance_counting")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class14] of  Map_Entry
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10073] of  Map_Entry
 
 	(key "change_tracking_active")
 	(key_class "java.lang.String")
 	(value "false")
 	(value_class "java.lang.String"))
 
-([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class15] of  Map_Entry
+([DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10074] of  Map_Entry
 
 	(key "add_name_on_instance_form")
 	(key_class "java.lang.String")
@@ -497,9 +497,6 @@
 	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_046371_Class3] of  Map
-)
-
 ([KB_600373_Class0] of  String
 
 	(name "factory_class_name")
@@ -508,9 +505,9 @@
 ([KB_600373_Class1] of  Map
 
 	(entries
-		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class13]
-		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class14]
-		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class15]))
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10072]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10073]
+		[DSI_ONT_FINAL_EQUIPO_ARGONAUTA_ProjectKB_Class10074]))
 
 ([KB_600373_Class100] of  Property_List
 )
@@ -602,6 +599,9 @@
 )
 
 ([KB_600373_Class99] of  Property_List
+)
+
+([KB_997196_Class3] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
