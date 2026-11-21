@@ -11,9 +11,6 @@ when
     not  PoseeObjeto(ser == $m, objeto == $o)
 then
     insert(new PoseeObjeto($m, $o));
-    System.out.println("  >>> " + $m.getNombre()
-        + " obtiene " + $o.getNombre()
-        + " debido a tener el favor de " + $d.getNombre());
-    delete($f);
+    System.out.println($m.getNombre() + " obtiene " + $o.getNombre() + " debido a tener el favor de " + $d.getNombre()+".");
     delete($dObj);
 end
