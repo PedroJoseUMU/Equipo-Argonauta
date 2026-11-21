@@ -112,7 +112,6 @@ public class ConocimientoInicial {
 	            posee(dedalo, cera);
 	            posee(dedalo, plumas);
 	            
-	            
 
 
 	            concede(casco, invisibilidad);

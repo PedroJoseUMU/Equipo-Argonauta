@@ -8,7 +8,7 @@ import relaciones.*;
 
 global io.Escritor escritor;
 
-// REGLA 1: MISION LOGRADA
+// REGLA 1: MISION DE LIBERAR A UN PRESO LOGRADA
 rule "Respuesta positiva a mision liberar"
     agenda-group "Resultados"
 when
@@ -16,10 +16,10 @@ when
     $preso : Ser(nombre == $objetivo)
     Libera(liberador == $heroe, preso == $preso)
 then
-    escritor.escribirLinea("Si, " + $heroe + " puede liberar a " + $preso + ".");
+    escritor.escribirResultado("Si, " + $heroe + " puede liberar a " + $preso + ".");
 end
 
-// REGLA 2: MISION FALLIDA
+// REGLA 2: MISION DE LIBERAR A UN PRESO FALLIDA
 rule "Respuesta negativa a mision liberar"
     agenda-group "Resultados"
 when
@@ -27,5 +27,27 @@ when
     $preso : Ser(nombre == $objetivo)
     not Libera(liberador == $heroe, preso == $preso)
 then
-    escritor.escribirLinea("No, " + $heroe + " no ha podido liberar a " + $preso + ".");
+    escritor.escribirResultado("No, " + $heroe + " no ha podido liberar a " + $preso + ".");
+end
+
+// REGLA 3: MISION DE MATAR A UN ENEMIGO LOGRADA
+rule "Respuesta positiva a mision de matar"
+	agenda-group "Resultados"
+when
+	Pregunta(accion == "matar", $heroe : sujeto, $objetivo : objetivo)
+	$asesinado : Ser(nombre == $objetivo)
+	Mata(asesino == $heroe, asesinado == $asesinado)
+then
+	escritor.escribirResultado("Si, " + $heroe + " puede matar a " + $asesinado + ".");
+end
+
+// REGLA 4: MISION DE MATAR A UN ENEMIGO FALLIDA
+rule "Respuesta negativa a mision de matar"
+	agenda-group "Resultados"
+when
+	Pregunta(accion == "matar", $heroe : sujeto, $objetivo : objetivo)
+	$asesinado : Ser(nombre == $objetivo)
+	not Mata(asesino == $heroe, asesinado == $asesinado)
+then
+	escritor.escribirResultado("No, " + $heroe + " no ha podido matar a " + $asesinado + ".");
 end

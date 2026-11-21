@@ -95,7 +95,7 @@ agenda-group "Historias"
     	$minotauro : Minotauro(estaVivo == true)
     	EstaEn(ser == $minotauro, lugar == $laberinto)
     	$intruso : Mortal(estaVivo == true, estaLibre == true)
-    	EstaEn(ser == $intruso, lugar == $laberinto)
+    	EstaEn(this != $minotauro,ser == $intruso, lugar == $laberinto)
     	not PoseeObjeto(ser == $intruso, objeto.nombre == "Hilo de Ariadna")
     	not Apresa(preso == $intruso)
     	not Libera(preso == $intruso)
