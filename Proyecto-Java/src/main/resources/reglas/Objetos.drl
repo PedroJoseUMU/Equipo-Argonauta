@@ -1,0 +1,18 @@
+package reglas;
+
+import modelo.*;
+import relaciones.*;
+
+rule "Objeto Magico otorga capacidad a su poseedor"
+    agenda-group "Historias"
+when
+    $s   : Ser()
+    $po  : PoseeObjeto(ser == $s, $o : objeto)
+    $oc  : OtorgaCapacidad(objeto == $o)
+    not  TieneCapacidad(ser == $s, capacidad == $oc.capacidad)
+then
+    insert(new TieneCapacidad($s, $oc.getCapacidad()));
+    System.out.println("  >>> " + $s.getNombre()
+        + " obtiene la capacidad " + $oc.getCapacidad()
+        + " debido a tener " + $o.getNombre());
+end

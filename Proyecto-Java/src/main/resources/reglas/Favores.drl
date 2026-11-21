@@ -1,0 +1,19 @@
+package reglas;
+
+import modelo.*;
+import relaciones.*;
+
+rule "Dios transfiere objeto a quien tenga su favor"
+    agenda-group "Historias"
+when
+    $f  : TieneFavor($m : mortal, $d : Dios)
+    $dObj : PoseeObjeto(ser == $d, $o : objeto)
+    not  PoseeObjeto(ser == $m, objeto == $o)
+then
+    insert(new PoseeObjeto($m, $o));
+    System.out.println("  >>> " + $m.getNombre()
+        + " obtiene " + $o.getNombre()
+        + " debido a tener el favor de " + $d.getNombre());
+    delete($f);
+    delete($dObj);
+end
