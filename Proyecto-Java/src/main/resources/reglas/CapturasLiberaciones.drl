@@ -58,7 +58,7 @@ agenda-group "Historias"
         TieneEnojo($ser : ser, enojado == $minos)
         $apresado : Mortal(this == $ser, estaVivo == true, estaLibre == true)
         $laberinto : Lugar(nombre == "Laberinto")
-    	$ubicacionAnterior : EstaEn(ser == $apresado, lugar != $laberinto)
+    	$ubicacionAnterior : EstaEn(ser == $apresado, lugar != $laberinto, lugar.nombre != "Exterior del Laberinto")
     	not Libera(preso == $apresado)
      
     then
@@ -171,9 +171,6 @@ agenda-group "Historias"
     	$captor : Minotauro(estaVivo == true)
     	Apresa(captor == $captor, preso == $preso)
     	not Libera(preso == $preso)
-    	EstaEn(ser == $heroe, $lugar : lugar) // estan en el mismo lugar
-		EstaEn(ser == $preso, lugar == $lugar)
-        
     then
     	escritor.escribirLinea($preso + " es liberado por "+ $heroe +" en el "+$laberinto+ "." );
     	insert(new Libera($heroe, $preso));
@@ -199,4 +196,3 @@ agenda-group "Historias"
         escritor.escribirLinea($preso + " es liberado por "+ $heroe + " de forma sigilosa." );
     	insert(new Libera($heroe, $preso));
 end
-        

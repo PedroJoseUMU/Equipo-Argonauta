@@ -56,3 +56,21 @@ then
     escritor.escribirLinea($heroe + " localiza a Medusa gracias a las Ninfas y a su capacidad de vuelo.");
 end
 
+// REGLA 4: UN HEROE CON EL HILO LOCALIZA A UN PRESO EN EL LABERINTO
+rule "Heroe localiza a un preso en el laberinto"
+    agenda-group "Historias"
+when
+    $laberinto : Lugar(nombre == "Laberinto")
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    EstaEn(ser == $heroe, lugar == $laberinto)
+    PoseeObjeto(ser == $heroe, objeto.nombre == "Hilo de Ariadna")
+    $preso : Mortal(this != $heroe, estaVivo == true, estaLibre == false)
+    EstaEn(ser == $preso, lugar == $laberinto)
+    $minotauro : Minotauro(estaVivo == true)
+    Apresa(captor == $minotauro, preso == $preso)
+    not Localiza(buscador == $heroe, localizado == $preso)
+then
+    insert(new Localiza($heroe, $preso));
+    escritor.escribirLinea($heroe + " localiza a " + $preso + " gracias al Hilo de Ariadna.");
+end
+

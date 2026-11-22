@@ -61,6 +61,8 @@ Minos se enoja con Dedalo debido a la muerte de Minotauro.
 Dedalo es enviado al Laberinto debido al enojo de Minos.
 Minos se enoja con Icaro debido a su enojo con Dedalo.
 Icaro es enviado al Laberinto debido al enojo de Minos.
-Dedalo construye las alas conCera de AbejasyPlumas.
+Dedalo construye las alas con Cera de Abejas y Plumas.
 Icaro obtiene la capacidad Vuelo debido a tener Alas de Icaro.
+Icaro muere al intentar escapar con las alas.
 Dedalo obtiene la capacidad Vuelo debido a tener Alas de Dedalo.
+Dedalo sale del Laberinto volando con sus alas.

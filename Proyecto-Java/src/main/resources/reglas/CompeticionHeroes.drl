@@ -1,0 +1,63 @@
+package reglas
+
+import modelo.*;
+import relaciones.*;
+
+global io.Escritor escritor;
+
+// REGLA 1: HERACLES DERROTA A CETO GRACIAS A SU FUERZA Y AL FAVOR DE ZEUS
+rule "Heracles mata a Ceto para liberar a Andromeda"
+    agenda-group "Historias"
+    salience 10
+when
+    $heracles : Semidios(nombre == "Heracles", estaVivo == true, estaLibre == true, esHeroe == true)
+    $zeus : Dios(nombre == "Zeus")
+    TieneFavor(mortal == $heracles, dios == $zeus)
+    $fuerza : Capacidad(nombre == "Fuerza")
+    TieneCapacidad(ser == $heracles, capacidad == $fuerza)
+    $ceto : CriaturaMarina(nombre == "Ceto", estaVivo == true)
+    $andromeda : Humano(nombre == "Andromeda", estaVivo == true)
+    Apresa(captor == $ceto, preso == $andromeda)
+    not Mata(asesinado == $ceto)
+then
+    insert(new Mata($heracles, $ceto));
+    escritor.escribirLinea($heracles + " mata a " + $ceto + " gracias a su fuerza y al favor de Zeus.");
+end
+
+// Solo en la competencia con Zeus como aliado y tras rescatar a Andromeda,
+// REGLA 2: HERACLES DERROTA A OTRO HEROE QUE CONSERVE ALGUN TROFEO
+// SOLO CUANDO ESTA EN COMPETENCIA CON OTROS, TENGA EL FAVOR DE ZEUS Y HAYA LOGRADO RESCATAR A ANDROMEDA
+rule "Heracles derrota a un rival que posee un trofeo"
+    agenda-group "Historias"
+when
+    $heracles : Semidios(nombre == "Heracles", estaVivo == true, estaLibre == true, esHeroe == true)
+    $zeus : Dios(nombre == "Zeus")
+    TieneFavor(mortal == $heracles, dios == $zeus)
+    $fuerza : Capacidad(nombre == "Fuerza")
+    TieneCapacidad(ser == $heracles, capacidad == $fuerza)
+    $andromeda : Humano(nombre == "Andromeda")
+    Libera(liberador == $heracles, preso == $andromeda)
+    $rival : Mortal(this != $heracles, estaVivo == true, esHeroe == true)
+    $trofeo : Objeto(nombre == "Cabeza de Medusa" || nombre == "Cabeza del Minotauro")
+    PoseeObjeto(ser == $rival, objeto == $trofeo)
+    not Mata(asesinado == $rival)
+then
+    insert(new Mata($heracles, $rival));
+    escritor.escribirLinea($heracles + " derrota a " + $rival + " y consigue sus objetos al vencerle.");
+end
+
+// REGLA 3: UN HEROE HA REUNIDO LAS CABEZAS DE MEDUSA, DEL MINOTAURO Y DE CETO
+rule "Heroe reune las tres cabezas"
+    agenda-group "Historias"
+when
+    $heroe : Mortal(estaVivo == true, esHeroe == true)
+    $medusa : Objeto(nombre == "Cabeza de Medusa")
+    $minotauro : Objeto(nombre == "Cabeza del Minotauro")
+    $ceto : Objeto(nombre == "Cabeza de Ceto")
+    PoseeObjeto(ser == $heroe, objeto == $medusa)
+    PoseeObjeto(ser == $heroe, objeto == $minotauro)
+    PoseeObjeto(ser == $heroe, objeto == $ceto)
+then
+    escritor.escribirLinea($heroe + " termina con las tres cabezas: Medusa, Minotauro y Ceto.");
+end
+

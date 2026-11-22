@@ -77,5 +77,5 @@ Teseo mata a Medusa debido a tener Invisibilidad, Vuelo, Espejo y Cortar
 Teseo obtiene Cabeza de Medusa debido a matar a Medusa
 Teseo obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
 Teseo mata a Ceto debido a tener la capacidad Petrificar
-Andromeda es liberado debido a la muerte de Ceto.
 Teseo obtiene Cabeza de Ceto debido a matar a Ceto
+Andromeda es liberado debido a la muerte de Ceto.

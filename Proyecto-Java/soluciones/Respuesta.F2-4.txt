@@ -1,4 +1,4 @@
-No, Perseo no ha podido liberar a Andromeda.
+Si, Perseo puede liberar a Andromeda.
 
 Perseo presente y vivo y libre
 Andromeda presente y vivo y libre
@@ -64,25 +64,36 @@ Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
 Perseo es enviado al Laberinto debido al enojo de Minos.
 Teseo es enviado al Laberinto debido al enojo de Minos.
 Perseo es apresado en el Laberinto por Minotauro.
+Teseo localiza a Perseo gracias al Hilo de Ariadna.
 Andromeda queda presa debido a estar Ceto libre.
+Perseo es liberado por Teseo en el Laberinto.
 Perseo obtiene la capacidad Invisibilidad debido a tener Casco de Hades.
 Perseo obtiene la capacidad Cortar debido a tener Hoz de Acero.
 Medusa obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
 Teseo obtiene la capacidad Cortar debido a tener Espada de Teseo.
 Minotauro obtiene la capacidad Cortar debido a tener Cuerno del Minotauro.
-Teseo mata a Minotauro debido a tener la capacidad Cortar.
-Perseo es liberado debido a la muerte de Minotauro.
-Teseo obtiene Cabeza del Minotauro debido a matar a Minotauro
-Teseo obtiene Cuerno del Minotauro debido a matar a Minotauro
 Perseo consigue el Ojo de las Grayas gracias a su invisibilidad.
 Perseo devuelve el Ojo de las Grayas y localiza a las Ninfas.
 Perseo obtiene el Zurron Magico de las Ninfas.
 Perseo obtiene Escudo-Espejo gracias al favor de Hefesto y al Escudo de Bronce.
 Perseo obtiene la capacidad Espejo debido a tener Escudo-Espejo.
+Teseo mata a Minotauro debido a tener la capacidad Cortar.
+Teseo obtiene Cabeza del Minotauro debido a matar a Minotauro
+Teseo obtiene Cuerno del Minotauro debido a matar a Minotauro
 Minos se enoja con Dedalo debido a la muerte de Minotauro.
 Dedalo es enviado al Laberinto debido al enojo de Minos.
 Minos se enoja con Icaro debido a su enojo con Dedalo.
 Icaro es enviado al Laberinto debido al enojo de Minos.
-Dedalo construye las alas conCera de AbejasyPlumas.
+Dedalo construye las alas con Cera de Abejas y Plumas.
+Dedalo presta sus alas a Perseo para continuar su mision.
 Icaro obtiene la capacidad Vuelo debido a tener Alas de Icaro.
-Dedalo obtiene la capacidad Vuelo debido a tener Alas de Dedalo.
+Icaro muere al intentar escapar con las alas.
+Perseo obtiene la capacidad Vuelo debido a tener Alas de Dedalo.
+Perseo sale del Laberinto gracias a su capacidad de Vuelo.
+Perseo localiza a Medusa gracias a las Ninfas y a su capacidad de vuelo.
+Perseo mata a Medusa debido a tener Invisibilidad, Vuelo, Espejo y Cortar
+Perseo obtiene Cabeza de Medusa debido a matar a Medusa
+Perseo obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
+Perseo mata a Ceto debido a tener la capacidad Petrificar
+Perseo obtiene Cabeza de Ceto debido a matar a Ceto
+Andromeda es liberado debido a la muerte de Ceto.

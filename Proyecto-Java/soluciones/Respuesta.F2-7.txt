@@ -1,4 +1,4 @@
-No, Heracles no ha podido liberar a Andromeda.
+Si, Heracles puede liberar a Andromeda.
 
 Perseo presente y vivo y libre
 Andromeda presente y vivo y libre
@@ -64,6 +64,9 @@ Perseo localiza a las Grayas gracias a Atenea y Hermes.
 Ceto queda libre debido al enojo de Poseidon hacia Casiopea.
 Teseo es enviado al Laberinto debido al enojo de Minos.
 Andromeda queda presa debido a estar Ceto libre.
+Heracles mata a Ceto gracias a su fuerza y al favor de Zeus.
+Heracles obtiene Cabeza de Ceto debido a matar a Ceto
+Andromeda es liberado debido a la muerte de Ceto.
 Perseo obtiene la capacidad Invisibilidad debido a tener Casco de Hades.
 Perseo obtiene la capacidad Cortar debido a tener Hoz de Acero.
 Medusa obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
@@ -80,16 +83,34 @@ Perseo obtiene la capacidad Espejo debido a tener Escudo-Espejo.
 Perseo mata a Medusa debido a tener Invisibilidad, Vuelo, Espejo y Cortar
 Perseo obtiene Cabeza de Medusa debido a matar a Medusa
 Perseo obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
-Perseo mata a Ceto debido a tener la capacidad Petrificar
-Andromeda es liberado debido a la muerte de Ceto.
-Perseo obtiene Cabeza de Ceto debido a matar a Ceto
+Heracles derrota a Perseo y consigue sus objetos al vencerle.
+Heracles obtiene Cabeza de Medusa debido a matar a Perseo
+Heracles obtiene Escudo-Espejo debido a matar a Perseo
+Heracles obtiene Sandalias Aladas debido a matar a Perseo
+Heracles obtiene Zurron Magico debido a matar a Perseo
+Heracles obtiene Brida de Oro debido a matar a Perseo
+Heracles obtiene Casco de Hades debido a matar a Perseo
+Heracles obtiene Hoz de Acero debido a matar a Perseo
+Heracles obtiene la capacidad Petrificar debido a tener Cabeza de Medusa.
+Heracles obtiene la capacidad Espejo debido a tener Escudo-Espejo.
+Heracles obtiene la capacidad Vuelo debido a tener Sandalias Aladas.
+Heracles obtiene la capacidad Invisibilidad debido a tener Casco de Hades.
+Heracles obtiene la capacidad Cortar debido a tener Hoz de Acero.
 Teseo mata a Minotauro debido a tener la capacidad Cortar.
 Teseo obtiene Cabeza del Minotauro debido a matar a Minotauro
 Teseo obtiene Cuerno del Minotauro debido a matar a Minotauro
+Heracles derrota a Teseo y consigue sus objetos al vencerle.
+Heracles obtiene Cuerno del Minotauro debido a matar a Teseo
+Heracles obtiene Cabeza del Minotauro debido a matar a Teseo
+Heracles obtiene Espada de Teseo debido a matar a Teseo
+Heracles obtiene Hilo de Ariadna debido a matar a Teseo
+Heracles termina con las tres cabezas: Medusa, Minotauro y Ceto.
 Minos se enoja con Dedalo debido a la muerte de Minotauro.
 Dedalo es enviado al Laberinto debido al enojo de Minos.
 Minos se enoja con Icaro debido a su enojo con Dedalo.
 Icaro es enviado al Laberinto debido al enojo de Minos.
-Dedalo construye las alas conCera de AbejasyPlumas.
+Dedalo construye las alas con Cera de Abejas y Plumas.
 Icaro obtiene la capacidad Vuelo debido a tener Alas de Icaro.
+Icaro muere al intentar escapar con las alas.
 Dedalo obtiene la capacidad Vuelo debido a tener Alas de Dedalo.
+Dedalo sale del Laberinto volando con sus alas.

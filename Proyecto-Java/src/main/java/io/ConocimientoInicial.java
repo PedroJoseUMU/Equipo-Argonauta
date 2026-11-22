@@ -49,6 +49,7 @@ public class ConocimientoInicial {
 		        
 		        Lugar laberinto = new Lugar("Laberinto");
 		        registrar(laberinto);
+		        registrar(new Lugar("Exterior del Laberinto"));
 	
 		        for (Ser s : new Ser[] { zeus, poseidon, atenea, hermes, hades, hefesto,
 		                                 grayas, ninfas, perseo, andromeda, casiopea,

@@ -36,7 +36,7 @@ when
     not Mata(asesinado == $minot)
 then
     insert(new Mata($heroe, $minot));
-    escritor.escribirLinea($heroe + " mata al Minotauro " + $minot + " debido a tener la capacidad " +$fue+".");
+    escritor.escribirLinea($heroe + " mata a " + $minot + " debido a tener la capacidad " +$fue+".");
 end
 
 rule "Minos se enoja con Dedalo si matan al Minotauro"
@@ -82,6 +82,6 @@ then
 	insert(new OtorgaCapacidad($alasI, $vuelo));
     insert(new OtorgaCapacidad($alasD, $vuelo));
     insert(new PoseeObjeto($dedalo, $alasD));
-    escritor.escribirLinea($dedalo+" construye las alas con"+ $cera+ "y" +$plumas +".");
+    escritor.escribirLinea($dedalo+" construye las alas con "+ $cera+ " y " + $plumas +".");
 
 end

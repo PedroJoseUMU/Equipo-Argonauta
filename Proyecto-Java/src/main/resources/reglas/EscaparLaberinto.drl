@@ -1,0 +1,82 @@
+package reglas
+
+import modelo.*;
+import relaciones.*;
+import io.Pregunta;
+
+global io.Escritor escritor;
+
+// REGLA 1: ICARO CAE AL ESCAPAR DEL LABERINTO CON SUS ALAS REPARADAS
+rule "Icaro muere al intentar escapar del laberinto"
+    agenda-group "Historias"
+when
+    $laberinto : Lugar(nombre == "Laberinto")
+    $icaro : Humano(nombre == "Icaro", estaVivo == true)
+    EstaEn(ser == $icaro, lugar == $laberinto)
+    $alas : Objeto(nombre == "Alas de Icaro")
+    PoseeObjeto(ser == $icaro, objeto == $alas)
+    $vuelo : Capacidad(nombre == "Vuelo")
+    TieneCapacidad(ser == $icaro, capacidad == $vuelo)
+then
+    modify($icaro) { setEstaVivo(false); }
+    escritor.escribirLinea("Icaro muere al intentar escapar con las alas.");
+end
+
+// REGLA 2: DEDALO PRESTA SUS ALAS AL HEROE QUE DEBE RESCATAR (ESCENARIO DE ALAS ALTERNATIVAS)
+rule "Dedalo presta sus alas al heroe que debe liberar a Andromeda"
+    agenda-group "Historias"
+    // se le da prioridad sobre a la REGLA 1
+    // de lo contrario, Dedalo abandonaria el laberinto y heroes como Perseo no podrian conseguir sus alas en los mitos
+    salience 1
+when
+    $laberinto : Lugar(nombre == "Laberinto")
+    $dedalo : Humano(nombre == "Dedalo", estaVivo == true)
+    EstaEn(ser == $dedalo, lugar == $laberinto)
+    $heroe : Mortal(this != $dedalo, estaVivo == true, estaLibre == true, esHeroe == true)
+    EstaEn(ser == $heroe, lugar == $laberinto)
+    Pregunta(accion == "liberar", sujeto == $heroe, objetivo == "Andromeda")
+    $alas : Objeto(nombre == "Alas de Dedalo")
+    $posesion : PoseeObjeto(ser == $dedalo, objeto == $alas)
+    $vuelo : Capacidad(nombre == "Vuelo")
+    OtorgaCapacidad(objeto == $alas, capacidad == $vuelo)
+    not TieneCapacidad(ser == $heroe, capacidad == $vuelo)
+then
+    delete($posesion);
+    insert(new PoseeObjeto($heroe, $alas));
+    escritor.escribirLinea($dedalo + " presta sus alas a " + $heroe + " para continuar su mision.");
+end
+
+// REGLA 3: CON SUS ALAS REPARADAS, DEDALO SALE DEL LABERINTO
+rule "Dedalo sale del laberinto volando"
+    agenda-group "Historias"
+when
+    $laberinto : Lugar(nombre == "Laberinto")
+    $exterior : Lugar(nombre == "Exterior del Laberinto")
+    $dedalo : Humano(nombre == "Dedalo", estaVivo == true, estaLibre == true)
+    $enLaberinto : EstaEn(ser == $dedalo, lugar == $laberinto)
+    $vuelo : Capacidad(nombre == "Vuelo")
+    TieneCapacidad(ser == $dedalo, capacidad == $vuelo)
+    PoseeObjeto(ser == $dedalo, objeto.nombre == "Alas de Dedalo")
+then
+    delete($enLaberinto);
+    insert(new EstaEn($dedalo, $exterior));
+    escritor.escribirLinea($dedalo + " sale del Laberinto volando con sus alas.");
+end
+
+// REGLA 4: UN HEROE LIBERADO SALE DEL LABERINTO CUANDO YA PUEDE VOLAR
+rule "Heroe con vuelo sale del laberinto"
+    agenda-group "Historias"
+when
+    $laberinto : Lugar(nombre == "Laberinto")
+    $exterior : Lugar(nombre == "Exterior del Laberinto")
+    $heroe : Mortal(estaVivo == true, estaLibre == true, esHeroe == true)
+    $enLaberinto : EstaEn(ser == $heroe, lugar == $laberinto)
+    $vuelo : Capacidad(nombre == "Vuelo")
+    TieneCapacidad(ser == $heroe, capacidad == $vuelo)
+    not Apresa(preso == $heroe)
+then
+    delete($enLaberinto);
+    insert(new EstaEn($heroe, $exterior));
+    escritor.escribirLinea($heroe + " sale del Laberinto gracias a su capacidad de Vuelo.");
+end
+

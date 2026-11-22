@@ -40,6 +40,7 @@ end
 
 rule "Quien mata se queda con las posesiones de la victima"
 agenda-group "Historias"
+salience 5
 when
     Mata($a : asesino, $v : asesinado)
     $p : PoseeObjeto(ser == $v, $o : objeto)
